@@ -90,9 +90,9 @@ function ContactContent() {
       {/* Header */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest border border-cyan-500/20">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border" style={{background:"rgba(123,27,90,0.10)",color:"#7B1B5A",borderColor:"rgba(123,27,90,0.20)"}}>
             <MapPin className="w-4 h-4" />
-            <span>Suri Hub • Customer Assistance &amp; Helpdesk</span>
+            <span>Suri Hub â€¢ Customer Assistance &amp; Helpdesk</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold font-heading text-slate-900 dark:text-white">
             Connect with Our <span className="gradient-text">IT Specialists</span>
@@ -110,13 +110,13 @@ function ContactContent() {
           <div className="lg:col-span-5 space-y-6">
             <div className="glass-card rounded-2xl p-6 sm:p-8 space-y-6 border border-slate-200 dark:border-slate-800">
               <h2 className="text-lg font-bold font-heading text-slate-900 dark:text-white flex items-center gap-2">
-                <Building className="w-5 h-5 text-cyan-500" />
+                <Building className="w-5 h-5 text-[#7B1B5A]" />
                 <span>Office &amp; Laboratory Coordinates</span>
               </h2>
 
               <div className="space-y-4 text-xs">
                 <div className="flex items-start gap-3">
-                  <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-500 border border-cyan-500/20 shrink-0">
+                  <div className="p-2.5 rounded-xl bg-[#7B1B5A]/10 text-[#7B1B5A] border border-[#7B1B5A]/20 shrink-0">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
@@ -124,13 +124,13 @@ function ContactContent() {
                       Address
                     </span>
                     <span className="text-slate-600 dark:text-slate-400 leading-relaxed block mt-0.5">
-                      {siteSettings.address_line1}, {siteSettings.address_line2}, {siteSettings.city}, {siteSettings.district}, WB – {siteSettings.pincode}
+                      {siteSettings.address_line1}, {siteSettings.address_line2}, {siteSettings.city}, {siteSettings.district}, WB â€“ {siteSettings.pincode}
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-500 border border-blue-500/20 shrink-0">
+                  <div className="p-2.5 rounded-xl bg-[#7B1B5A]/10 text-blue-500 border border-[#7B1B5A]/20 shrink-0">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
@@ -138,10 +138,10 @@ function ContactContent() {
                       Direct Helplines
                     </span>
                     <div className="space-y-1 mt-0.5">
-                      <a href={`tel:${siteSettings.phone_sales}`} className="text-cyan-600 dark:text-cyan-400 hover:underline block font-semibold">
+                      <a href={`tel:${siteSettings.phone_sales}`} className="text-[#7B1B5A] hover:underline block font-semibold">
                         Sales: {siteSettings.phone_sales}
                       </a>
-                      <a href={`tel:${siteSettings.phone_service}`} className="text-emerald-600 dark:text-emerald-400 hover:underline block font-semibold">
+                      <a href={`tel:${siteSettings.phone_service}`} className="text-[#c44a8a] dark:text-[#c44a8a] hover:underline block font-semibold">
                         Service Lab: {siteSettings.phone_service}
                       </a>
                       <a href={`tel:${siteSettings.phone_landline}`} className="text-slate-500 hover:underline block">
@@ -152,7 +152,7 @@ function ContactContent() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="p-2.5 rounded-xl bg-teal-500/10 text-teal-500 border border-teal-500/20 shrink-0">
+                  <div className="p-2.5 rounded-xl bg-[#A6A4A5]/10 text-[#A6A4A5] border border-[#A6A4A5]/20 shrink-0">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
@@ -202,7 +202,7 @@ function ContactContent() {
             <div className="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl">
               {ticketNumber ? (
                 <div className="py-12 text-center space-y-4">
-                  <div className="w-16 h-16 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto border border-emerald-500/30">
+                  <div className="w-16 h-16 bg-[#c44a8a]/10 text-[#c44a8a] rounded-full flex items-center justify-center mx-auto border border-[#c44a8a]/25">
                     <CheckCircle2 className="w-9 h-9" />
                   </div>
                   <h3 className="text-2xl font-bold font-heading text-slate-900 dark:text-white">
@@ -213,7 +213,7 @@ function ContactContent() {
                   </p>
 
                   <div className="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 max-w-xs mx-auto">
-                    <span className="text-[10px] uppercase font-bold text-cyan-600 dark:text-cyan-400">
+                    <span className="text-[10px] uppercase font-bold text-[#7B1B5A]">
                       Tracking Reference ID
                     </span>
                     <div className="text-2xl font-extrabold font-mono tracking-widest text-slate-900 dark:text-white mt-1">
@@ -224,7 +224,7 @@ function ContactContent() {
                   <div className="pt-2 flex flex-col sm:flex-row justify-center gap-3">
                     <button
                       onClick={openWhatsApp}
-                      className="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer"
+                      className="px-5 py-3 rounded-xl bg-[#7B1B5A] hover:bg-[#c44a8a] text-white font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer"
                     >
                       <MessageSquare className="w-4 h-4" />
                       <span>Chat on WhatsApp Directly</span>
@@ -244,7 +244,7 @@ function ContactContent() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest">
+                  <div className="flex items-center gap-2 text-[#7B1B5A] text-xs font-bold uppercase tracking-widest">
                     <Sparkles className="w-4 h-4" />
                     <span>Live CRM Ticket System</span>
                   </div>
@@ -359,7 +359,7 @@ function ContactContent() {
 
                   <div className="flex items-center justify-between pt-2">
                     <div className="flex items-center gap-1.5 text-xs text-slate-500">
-                      <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                      <ShieldCheck className="w-4 h-4 text-[#c44a8a]" />
                       <span>Data is strictly confidential</span>
                     </div>
 
@@ -395,3 +395,4 @@ export default function ContactPage() {
     </Suspense>
   );
 }
+

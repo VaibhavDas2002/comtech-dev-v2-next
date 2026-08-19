@@ -103,12 +103,27 @@ export default function AdminEnquiriesPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold font-heading text-white flex items-center gap-2">
-            <Inbox className="w-6 h-6 text-cyan-400" />
+            <Inbox className="w-6 h-6 text-[#E9A51A]" />
             <span>Leads &amp; Enquiries CRM</span>
           </h1>
           <p className="text-xs text-slate-400 mt-1">
-            Track customer requests, ticket numbers, follow-up statuses and notes
+            Track customer service appointments, quote requests, ticket numbers, and technician follow-up notes
           </p>
+        </div>
+
+        <div className="flex items-center gap-2.5">
+          <button
+            onClick={async () => {
+              if (confirm('CONFIRM PURGE: Delete all public enquiry and appointment records from database?')) {
+                await fetch('/api/enquiries/reset', { method: 'POST' });
+                loadEnquiries();
+              }
+            }}
+            className="px-3.5 py-2 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500/20 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+            <span>Purge / Reset CRM</span>
+          </button>
         </div>
       </div>
 
@@ -168,33 +183,57 @@ export default function AdminEnquiriesPage() {
                 {filtered.map((enq) => (
                   <tr key={enq.id} className="hover:bg-slate-800/30 transition-colors">
                     <td className="p-4">
-                      <span className="font-mono font-extrabold text-cyan-400 block">
+                      <span className="font-mono font-extrabold text-[#E9A51A] block">
                         {enq.ticket_number}
                       </span>
                       <span className="text-[10px] text-slate-500 block mt-0.5">
                         {formatDate(enq.created_at)}
                       </span>
+                      {enq.type === 'service_appointment' && (
+                        <span className="inline-block mt-1 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider" style={{ background: 'rgba(123,27,90,0.25)', color: '#E9A51A', border: '1px solid rgba(233,165,26,0.30)' }}>
+                          📅 Appointment
+                        </span>
+                      )}
                     </td>
                     <td className="p-4">
                       <div className="font-bold text-white">{enq.name}</div>
-                      <div className="text-slate-400">{enq.phone}</div>
-                      {enq.email && <div className="text-slate-500 text-[10px]">{enq.email}</div>}
+                      <div className="text-slate-300 font-mono text-[11px]">{enq.phone}</div>
+                      {enq.address && (
+                        <div className="text-slate-400 text-[10px] line-clamp-1 mt-0.5">
+                          📍 {enq.address}
+                        </div>
+                      )}
                     </td>
                     <td className="p-4">
                       <span className="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-semibold text-slate-300 uppercase block w-fit">
                         {enq.type}
                       </span>
                       {enq.service_or_product_name && (
-                        <span className="text-[11px] text-cyan-300 line-clamp-1 mt-1 block">
+                        <span className="text-[11px] text-[#E9A51A] line-clamp-1 mt-1 block font-semibold">
                           {enq.service_or_product_name}
                         </span>
                       )}
+                      {enq.appointment_date && (
+                        <div className="text-[10px] text-slate-400 mt-1">
+                          🗓 {enq.appointment_date} ({enq.appointment_time_slot || 'Anytime'})
+                        </div>
+                      )}
+                      {enq.service_mode && (
+                        <div className="text-[10px] font-medium text-purple-300">
+                          Mode: {enq.service_mode === 'lab_visit' ? '🏢 Lab Visit' : enq.service_mode === 'onsite_visit' ? '🚗 Onsite' : '💻 Remote'}
+                        </div>
+                      )}
                     </td>
                     <td className="p-4 max-w-xs">
-                      <p className="line-clamp-2 text-slate-300 leading-relaxed">{enq.message}</p>
+                      {enq.device_brand_model && (
+                        <div className="text-[11px] font-bold text-slate-200 mb-0.5">
+                          🔧 {enq.device_brand_model}
+                        </div>
+                      )}
+                      <p className="line-clamp-2 text-slate-400 text-[11px] leading-relaxed">{enq.message}</p>
                       {enq.admin_notes && (
                         <div className="mt-1.5 p-1.5 rounded bg-slate-800/90 border border-slate-700 text-[10px] text-amber-300">
-                          <span className="font-bold">Note: </span>
+                          <span className="font-bold">Staff Note: </span>
                           {enq.admin_notes}
                         </div>
                       )}
@@ -221,6 +260,8 @@ export default function AdminEnquiriesPage() {
                             ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
                             : enq.status === 'quoted'
                             ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
+                            : enq.status === 'in_progress'
+                            ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
                             : enq.status === 'resolved'
                             ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
                             : 'bg-slate-800 text-slate-400'
@@ -233,9 +274,10 @@ export default function AdminEnquiriesPage() {
                       <div className="flex items-center justify-end gap-2">
                         <a
                           href={`https://wa.me/91${enq.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-                            `Hello ${enq.name}, replying to your Comtech enquiry (Ticket ID: ${enq.ticket_number}).`
+                            `Hello ${enq.name}, Comtech Infosys Suri regarding your ticket ${enq.ticket_number}.`
                           )}`}
                           target="_blank"
+                          rel="noopener noreferrer"
                           className="p-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30"
                           title="Open WhatsApp"
                         >
@@ -243,7 +285,7 @@ export default function AdminEnquiriesPage() {
                         </a>
                         <button
                           onClick={() => openEditModal(enq)}
-                          className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-400"
+                          className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-[#E9A51A]"
                           title="Update Status / Note"
                         >
                           <Edit className="w-3.5 h-3.5" />

@@ -25,10 +25,10 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-slate-950 text-slate-300 border-t border-slate-800/80 pt-16 pb-12 relative overflow-hidden">
+    <footer className="text-slate-300 border-t pt-16 pb-12 relative overflow-hidden" style={{background: '#0e0309', borderColor: '#3a0f2b'}}>
       {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none" style={{background: 'rgba(123,27,90,0.08)'}} />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none" style={{background: 'rgba(233,165,26,0.05)'}} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
@@ -47,7 +47,7 @@ export function Footer() {
                   <span className="text-xl font-extrabold font-heading tracking-tight text-white">
                     COMTECH
                   </span>
-                  <span className="text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+                  <span className="text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded" style={{background: 'rgba(123,27,90,0.25)', color: '#E9A51A', border: '1px solid rgba(233,165,26,0.30)'}}>
                     Suri
                   </span>
                 </div>
@@ -62,11 +62,11 @@ export function Footer() {
             </p>
 
             <div className="flex items-center gap-3 pt-2">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-cyan-400">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs" style={{background: '#1a0511', border: '1px solid #3a0f2b', color: '#E9A51A'}}>
                 <Shield className="w-3.5 h-3.5" />
-                <span>GST Registered & Certified</span>
+                <span>GST Registered &amp; Certified</span>
               </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-emerald-400">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs" style={{background: '#1a0511', border: '1px solid #3a0f2b', color: '#c44a8a'}}>
                 <span>100% Genuine Brands</span>
               </div>
             </div>
@@ -79,37 +79,42 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link href="/" className="hover:text-cyan-400 transition-colors flex items-center gap-1">
+                <Link href="/" className="hover:text-[#E9A51A] transition-colors flex items-center gap-1">
                   Home Overview
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-cyan-400 transition-colors flex items-center gap-1">
+                <Link href="/about" className="hover:text-[#E9A51A] transition-colors flex items-center gap-1">
                   About Comtech
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-cyan-400 transition-colors flex items-center gap-1">
+                <Link href="/services" className="hover:text-[#E9A51A] transition-colors flex items-center gap-1">
                   Our IT Services
                 </Link>
               </li>
               <li>
-                <Link href="/products" className="hover:text-cyan-400 transition-colors flex items-center gap-1">
+                <Link href="/book-appointment" className="hover:text-[#E9A51A] transition-colors flex items-center gap-1 font-semibold" style={{color: '#E9A51A'}}>
+                  ✦ Book Service Appointment
+                </Link>
+              </li>
+              <li>
+                <Link href="/products" className="hover:text-[#E9A51A] transition-colors flex items-center gap-1">
                   Products & Sales
                 </Link>
               </li>
               <li>
-                <Link href="/promotions" className="hover:text-cyan-400 transition-colors flex items-center gap-1">
+                <Link href="/promotions" className="hover:text-[#E9A51A] transition-colors flex items-center gap-1">
                   Special Promotions
                 </Link>
               </li>
               <li>
-                <Link href="/gallery" className="hover:text-cyan-400 transition-colors flex items-center gap-1">
+                <Link href="/gallery" className="hover:text-[#E9A51A] transition-colors flex items-center gap-1">
                   Photo Gallery
                 </Link>
               </li>
               <li>
-                <Link href="/blogs" className="hover:text-cyan-400 transition-colors flex items-center gap-1">
+                <Link href="/blogs" className="hover:text-[#E9A51A] transition-colors flex items-center gap-1">
                   Tech Knowledgebase
                 </Link>
               </li>
@@ -123,32 +128,32 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link href="/services?category=CCTV+%26+Surveillance" className="hover:text-cyan-400 transition-colors">
+                <Link href="/services?category=CCTV+%26+Surveillance" className="hover:text-[#E9A51A] transition-colors">
                   CCTV ColorVu Night Cameras
                 </Link>
               </li>
               <li>
-                <Link href="/services?category=Tally+Prime" className="hover:text-cyan-400 transition-colors">
+                <Link href="/services?category=Tally+Prime" className="hover:text-[#E9A51A] transition-colors">
                   Tally Prime Licenses & TDL
                 </Link>
               </li>
               <li>
-                <Link href="/services?category=Hardware+%26+Motherboard+Lab" className="hover:text-cyan-400 transition-colors">
+                <Link href="/services?category=Hardware+%26+Motherboard+Lab" className="hover:text-[#E9A51A] transition-colors">
                   Chip-Level Laptop Lab
                 </Link>
               </li>
               <li>
-                <Link href="/services?category=Website+%26+Software" className="hover:text-cyan-400 transition-colors">
+                <Link href="/services?category=Website+%26+Software" className="hover:text-[#E9A51A] transition-colors">
                   Custom Web & ERP Dev
                 </Link>
               </li>
               <li>
-                <Link href="/services?category=Antivirus+%26+Security" className="hover:text-cyan-400 transition-colors">
+                <Link href="/services?category=Antivirus+%26+Security" className="hover:text-[#E9A51A] transition-colors">
                   Quick Heal & Seqrite Antivirus
                 </Link>
               </li>
               <li>
-                <Link href="/services?category=Networking+%26+AMC" className="hover:text-cyan-400 transition-colors">
+                <Link href="/services?category=Networking+%26+AMC" className="hover:text-[#E9A51A] transition-colors">
                   Corporate IT AMC Contracts
                 </Link>
               </li>
@@ -162,13 +167,13 @@ export function Footer() {
             </h3>
             <div className="space-y-2.5 text-xs text-slate-400">
               <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 shrink-0 mt-0.5" style={{color: '#E9A51A'}} />
                 <span>
                   {siteSettings.address_line1}, {siteSettings.city}, {siteSettings.district}, WB – {siteSettings.pincode}
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
+                <Phone className="w-4 h-4 shrink-0" style={{color: '#c44a8a'}} />
                 <div>
                   <a href={`tel:${siteSettings.phone_sales}`} className="hover:text-white block">
                     Sales: {siteSettings.phone_sales}
@@ -179,7 +184,7 @@ export function Footer() {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-blue-400 shrink-0" />
+                <Mail className="w-4 h-4 shrink-0" style={{color: '#7B1B5A'}} />
                 <a href={`mailto:${siteSettings.email_general}`} className="hover:text-white truncate">
                   {siteSettings.email_general}
                 </a>
@@ -202,7 +207,9 @@ export function Footer() {
               Support Enquiry
             </Link>
             <span>&bull;</span>
-            <Link href="/admin" className="flex items-center gap-1 text-slate-400 hover:text-cyan-400 transition-colors">
+            <Link href="/admin" className="flex items-center gap-1 text-slate-400 transition-colors" style={{}}
+              onMouseEnter={e => (e.currentTarget.style.color = '#E9A51A')}
+              onMouseLeave={e => (e.currentTarget.style.color = '')}>
               <Lock className="w-3 h-3" />
               <span>Admin Login</span>
             </Link>

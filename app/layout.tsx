@@ -45,7 +45,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-slate-100 antialiased selection:bg-cyan-500/30 selection:text-cyan-300">
+      <body className="min-h-screen flex flex-col bg-white dark:bg-[#0e0309] text-slate-900 dark:text-slate-100 antialiased selection:bg-[#7B1B5A]/30 selection:text-[#E9A51A]">
         <AppProviders>
           <Navbar />
           <main className="flex-1">{children}</main>

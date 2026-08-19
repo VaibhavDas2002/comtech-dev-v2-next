@@ -16,7 +16,7 @@ export function LatestBlogsSection({ blogs }: LatestBlogsProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-2">
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest mb-2" style={{color: '#7B1B5A'}}>
               <BookOpen className="w-4 h-4" />
               <span>Knowledge Center &amp; Guides</span>
             </div>
@@ -30,7 +30,8 @@ export function LatestBlogsSection({ blogs }: LatestBlogsProps) {
 
           <Link
             href="/blogs"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 transition-colors group"
+            className="inline-flex items-center gap-1.5 text-xs font-bold transition-colors group"
+            style={{color: '#7B1B5A'}}
           >
             <span>Read All Articles</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -51,7 +52,7 @@ export function LatestBlogsSection({ blogs }: LatestBlogsProps) {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-                <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded bg-slate-900/80 text-cyan-400 text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm">
+                <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm" style={{background: 'rgba(26,5,17,0.85)', color: '#E9A51A'}}>
                   {blog.category}
                 </span>
               </div>
@@ -60,14 +61,14 @@ export function LatestBlogsSection({ blogs }: LatestBlogsProps) {
                 <div>
                   <div className="flex items-center gap-3 text-[11px] text-slate-400 mb-2">
                     <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3 text-cyan-500" />
+                      <Clock className="w-3 h-3" style={{color: '#7B1B5A'}} />
                       {blog.reading_time_minutes} min read
                     </span>
                     <span>•</span>
                     <span>{formatDate(blog.published_at)}</span>
                   </div>
 
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-cyan-500 transition-colors line-clamp-2">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white line-clamp-2 transition-colors group-hover:text-[#7B1B5A]">
                     {blog.title}
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 line-clamp-2 leading-relaxed">
@@ -75,7 +76,7 @@ export function LatestBlogsSection({ blogs }: LatestBlogsProps) {
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-cyan-600 dark:text-cyan-400">
+                <div className="pt-3 border-t border-slate-200 dark:border-[#3a0f2b] flex items-center justify-between text-xs font-semibold" style={{color: '#7B1B5A'}}>
                   <span>Read Full Article</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>

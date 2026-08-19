@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect } from 'react';
 import { useApp } from '@/components/providers/AppProviders';
@@ -87,10 +87,10 @@ export default function PromotionsPage() {
 
                   <div className="p-6 sm:p-8 space-y-4">
                     <div>
-                      <h2 className="text-xl font-bold font-heading text-slate-900 dark:text-white group-hover:text-cyan-500 transition-colors">
+                      <h2 className="text-xl font-bold font-heading text-slate-900 dark:text-white group-hover:text-[#7B1B5A] transition-colors">
                         {promo.title}
                       </h2>
-                      <p className="text-xs font-semibold text-cyan-600 dark:text-cyan-400 mt-1">
+                      <p className="text-xs font-semibold text-[#7B1B5A] mt-1">
                         {promo.discount_text}
                       </p>
                     </div>
@@ -101,7 +101,7 @@ export default function PromotionsPage() {
 
                     {/* Coupon Box */}
                     {promo.coupon_code && (
-                      <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-dashed border-cyan-500/40 flex items-center justify-between">
+                      <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-dashed border-[#7B1B5A]/30 flex items-center justify-between">
                         <div>
                           <span className="text-[9px] uppercase font-bold text-slate-400 block">
                             Promo Coupon Code
@@ -112,7 +112,7 @@ export default function PromotionsPage() {
                         </div>
                         <button
                           onClick={() => handleCopy(promo.coupon_code!)}
-                          className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 text-xs font-semibold transition-colors cursor-pointer"
+                          className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#7B1B5A]/10 hover:bg-[#7B1B5A]/20 text-[#7B1B5A] text-xs font-semibold transition-colors cursor-pointer"
                         >
                           {copiedCode === promo.coupon_code ? (
                             <>
@@ -160,3 +160,4 @@ export default function PromotionsPage() {
     </div>
   );
 }
+

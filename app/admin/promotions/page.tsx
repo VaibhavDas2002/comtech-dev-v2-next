@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Promotion } from '@/lib/types';
 import { Gift, Plus, Edit, Trash2, Tag, Clock, X } from 'lucide-react';
+import { MediaUploader } from '@/components/ui/MediaUploader';
 
 export default function AdminPromotionsPage() {
   const [promotions, setPromotions] = useState<Promotion[]>([]);
@@ -252,6 +253,13 @@ export default function AdminPromotionsPage() {
                   />
                 </div>
               </div>
+
+              <MediaUploader
+                value={imageUrl}
+                onChange={setImageUrl}
+                label="Promotion Banner / Flyer (Image or PDF)"
+                description="Upload JPEG/PNG/PDF (Max 6MB Base64) or enter an external Web Image URL"
+              />
 
               <div>
                 <label className="block text-xs font-semibold text-slate-300 mb-1">

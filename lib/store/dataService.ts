@@ -8,6 +8,10 @@ import {
   Enquiry,
   Testimonial,
   SiteSettings,
+  DocumentImage,
+  UserAccount,
+  MasterLocation,
+  MasterBrand,
 } from '../types';
 import {
   initialServices,
@@ -17,6 +21,9 @@ import {
   initialGallery,
   initialTestimonials,
   initialEnquiries,
+  initialUsers,
+  initialMasterLocations,
+  initialMasterBrands,
   siteSettings as defaultSettings,
 } from './seedData';
 
@@ -30,6 +37,10 @@ const globalStore = globalThis as unknown as {
   __comtech_testimonials__?: Testimonial[];
   __comtech_enquiries__?: Enquiry[];
   __comtech_settings__?: SiteSettings;
+  __comtech_documents__?: DocumentImage[];
+  __comtech_users__?: UserAccount[];
+  __comtech_master_locations__?: MasterLocation[];
+  __comtech_master_brands__?: MasterBrand[];
 };
 
 if (!globalStore.__comtech_services__) globalStore.__comtech_services__ = [...initialServices];
@@ -38,8 +49,12 @@ if (!globalStore.__comtech_blogs__) globalStore.__comtech_blogs__ = [...initialB
 if (!globalStore.__comtech_promotions__) globalStore.__comtech_promotions__ = [...initialPromotions];
 if (!globalStore.__comtech_gallery__) globalStore.__comtech_gallery__ = [...initialGallery];
 if (!globalStore.__comtech_testimonials__) globalStore.__comtech_testimonials__ = [...initialTestimonials];
-if (!globalStore.__comtech_enquiries__) globalStore.__comtech_enquiries__ = [...initialEnquiries];
+globalStore.__comtech_enquiries__ = []; // Cleared / reset from db as requested
 if (!globalStore.__comtech_settings__) globalStore.__comtech_settings__ = { ...defaultSettings };
+if (!globalStore.__comtech_documents__) globalStore.__comtech_documents__ = [];
+if (!globalStore.__comtech_users__) globalStore.__comtech_users__ = [...initialUsers];
+if (!globalStore.__comtech_master_locations__) globalStore.__comtech_master_locations__ = [...initialMasterLocations];
+if (!globalStore.__comtech_master_brands__) globalStore.__comtech_master_brands__ = [...initialMasterBrands];
 
 export const DataService = {
   // --- Site Settings ---
@@ -366,11 +381,13 @@ export const DataService = {
 
   async createEnquiry(enquiry: Omit<Enquiry, 'id' | 'ticket_number' | 'created_at' | 'status'> & { id?: string; ticket_number?: string; status?: string }): Promise<Enquiry> {
     const randomDigits = Math.floor(100000 + Math.random() * 900000);
+    const prefix = enquiry.type === 'service_appointment' ? 'APT' : 'COM';
     const newEnquiry: Enquiry = {
       id: enquiry.id || `enq-${Date.now()}`,
-      ticket_number: enquiry.ticket_number || `COM-${randomDigits}`,
+      ticket_number: enquiry.ticket_number || `${prefix}-${randomDigits}`,
       name: enquiry.name,
       phone: enquiry.phone,
+      whatsapp_number: enquiry.whatsapp_number || enquiry.phone,
       email: enquiry.email || '',
       type: enquiry.type || 'general',
       service_or_product_name: enquiry.service_or_product_name || '',
@@ -379,6 +396,21 @@ export const DataService = {
       urgency: enquiry.urgency || 'normal',
       status: 'pending',
       admin_notes: enquiry.admin_notes || '',
+
+      // Appointment specific fields
+      appointment_date: enquiry.appointment_date || '',
+      appointment_time_slot: enquiry.appointment_time_slot || '',
+      service_mode: enquiry.service_mode || 'lab_visit',
+      customer_category: enquiry.customer_category || 'Individual / Home',
+      address: enquiry.address || '',
+      landmark: enquiry.landmark || '',
+      device_brand_model: enquiry.device_brand_model || '',
+      device_serial: enquiry.device_serial || '',
+      warranty_status: enquiry.warranty_status || 'Out of Warranty',
+      issue_symptoms: enquiry.issue_symptoms || [],
+      attachment_doc_id: enquiry.attachment_doc_id || '',
+      attachment_url: enquiry.attachment_url || '',
+
       created_at: new Date().toISOString(),
     };
 
@@ -426,6 +458,150 @@ export const DataService = {
       // Local fallback
     }
     globalStore.__comtech_enquiries__ = updatedList;
+    return true;
+  },
+
+  // --- Document & Image Storage (Base64) ---
+  async getDocuments(): Promise<DocumentImage[]> {
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase.from('document_image').select('*').order('created_at', { ascending: false });
+      if (!error && data && data.length > 0) return data as DocumentImage[];
+    } catch {
+      // Fallback
+    }
+    return globalStore.__comtech_documents__ || [];
+  },
+
+  async getDocumentById(id: string): Promise<DocumentImage | null> {
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase.from('document_image').select('*').eq('id', id).single();
+      if (!error && data) return data as DocumentImage;
+    } catch {
+      // Fallback
+    }
+    const list = await this.getDocuments();
+    return list.find((d) => d.id === id) || null;
+  },
+
+  async saveDocument(doc: DocumentImage): Promise<DocumentImage> {
+    const list = await this.getDocuments();
+    const index = list.findIndex((d) => d.id === doc.id);
+    let updatedList: DocumentImage[];
+    if (index >= 0) {
+      updatedList = [...list];
+      updatedList[index] = doc;
+    } else {
+      updatedList = [doc, ...list];
+    }
+    try {
+      const supabase = createClient();
+      await supabase.from('document_image').upsert(doc);
+    } catch {
+      // Fallback
+    }
+    globalStore.__comtech_documents__ = updatedList;
+    return doc;
+  },
+
+  async deleteDocument(id: string): Promise<boolean> {
+    const list = await this.getDocuments();
+    const updatedList = list.filter((d) => d.id !== id);
+    try {
+      const supabase = createClient();
+      await supabase.from('document_image').delete().eq('id', id);
+    } catch {
+      // Fallback
+    }
+    globalStore.__comtech_documents__ = updatedList;
+    return true;
+  },
+
+  // --- Clear / Reset Enquiries ---
+  async clearAllEnquiries(): Promise<boolean> {
+    try {
+      const supabase = createClient();
+      await supabase.from('enquiries').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+    } catch {
+      // Fallback
+    }
+    globalStore.__comtech_enquiries__ = [];
+    return true;
+  },
+
+  // --- User Management ---
+  async getUsers(): Promise<UserAccount[]> {
+    return globalStore.__comtech_users__ || initialUsers;
+  },
+
+  async saveUser(user: UserAccount): Promise<UserAccount> {
+    const list = await this.getUsers();
+    const index = list.findIndex((u) => u.id === user.id);
+    let updatedList: UserAccount[];
+    if (index >= 0) {
+      updatedList = [...list];
+      updatedList[index] = { ...user, updated_at: new Date().toISOString() };
+    } else {
+      updatedList = [{ ...user, created_at: new Date().toISOString() }, ...list];
+    }
+    globalStore.__comtech_users__ = updatedList;
+    return user;
+  },
+
+  async deleteUser(id: string): Promise<boolean> {
+    const list = await this.getUsers();
+    globalStore.__comtech_users__ = list.filter((u) => u.id !== id);
+    return true;
+  },
+
+  // --- Master Locations ---
+  async getMasterLocations(): Promise<MasterLocation[]> {
+    return globalStore.__comtech_master_locations__ || initialMasterLocations;
+  },
+
+  async saveMasterLocation(loc: MasterLocation): Promise<MasterLocation> {
+    const list = await this.getMasterLocations();
+    const index = list.findIndex((l) => l.id === loc.id);
+    let updatedList: MasterLocation[];
+    if (index >= 0) {
+      updatedList = [...list];
+      updatedList[index] = loc;
+    } else {
+      updatedList = [loc, ...list];
+    }
+    globalStore.__comtech_master_locations__ = updatedList;
+    return loc;
+  },
+
+  async deleteMasterLocation(id: string): Promise<boolean> {
+    const list = await this.getMasterLocations();
+    globalStore.__comtech_master_locations__ = list.filter((l) => l.id !== id);
+    return true;
+  },
+
+  // --- Master Brands ---
+  async getMasterBrands(): Promise<MasterBrand[]> {
+    return globalStore.__comtech_master_brands__ || initialMasterBrands;
+  },
+
+  async saveMasterBrand(brand: MasterBrand): Promise<MasterBrand> {
+    const list = await this.getMasterBrands();
+    const index = list.findIndex((b) => b.id === brand.id);
+    let updatedList: MasterBrand[];
+    if (index >= 0) {
+      updatedList = [...list];
+      updatedList[index] = brand;
+    } else {
+      updatedList = [brand, ...list];
+    }
+    globalStore.__comtech_master_brands__ = updatedList;
+    return brand;
+  },
+
+  async deleteMasterBrand(id: string): Promise<boolean> {
+    const list = await this.getMasterBrands();
+    globalStore.__comtech_master_brands__ = list.filter((b) => b.id !== id);
     return true;
   },
 };

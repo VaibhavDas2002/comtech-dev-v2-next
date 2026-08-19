@@ -1,4 +1,16 @@
-import { Service, Product, Blog, Promotion, GalleryItem, Enquiry, Testimonial, SiteSettings } from '../types';
+import {
+  Service,
+  Product,
+  Blog,
+  Promotion,
+  GalleryItem,
+  Enquiry,
+  Testimonial,
+  SiteSettings,
+  UserAccount,
+  MasterLocation,
+  MasterBrand,
+} from '../types';
 
 export const siteSettings: SiteSettings = {
   company_sales_name: "Comtech Information Services",
@@ -577,49 +589,114 @@ export const initialTestimonials: Testimonial[] = [
   }
 ];
 
-export const initialEnquiries: Enquiry[] = [
+export const initialEnquiries: Enquiry[] = [];
+
+export const initialUsers: UserAccount[] = [
   {
-    id: "enq-1",
-    ticket_number: "COM-748921",
-    name: "Subham Sen",
-    phone: "9832145670",
-    email: "subham.sen@gmail.com",
-    type: "cctv_survey",
-    service_or_product_name: "CCTV Surveillance & Security Automation",
-    subject: "Requirement of 8 HD Cameras for warehouse",
-    message: "Need a free site survey for our new godown located on Sainthia Road, Suri. Want night vision with mobile app view.",
-    urgency: "urgent",
-    status: "pending",
-    admin_notes: "Customer called on morning. Scheduled site survey for tomorrow 3 PM.",
-    created_at: "2026-02-18T11:45:00Z"
+    id: "usr-1",
+    username: "Comtech_dev",
+    name: "Comtech Senior Administrator",
+    email: "admin@comtechis.in",
+    phone: "9434197268",
+    role: "Super Admin",
+    status: "active",
+    last_login: "2026-08-19T19:00:00Z",
+    created_at: "2026-01-01T00:00:00Z",
   },
   {
-    id: "enq-2",
-    ticket_number: "COM-619204",
-    name: "Priyanka Mondal",
-    phone: "9475189230",
-    email: "pmondal.acc@yahoo.com",
-    type: "product",
-    service_or_product_name: "Tally Prime Silver Single-User Official License",
-    subject: "New GST Business Registration - Tally Silver Quote",
-    message: "Starting a new hardware store in Suri market. Please share best price for Tally Prime Silver + Barcode printing TDL.",
-    urgency: "normal",
-    status: "quoted",
-    admin_notes: "Quotation sent via WhatsApp at ₹18,000 + GST. Waiting for GST certificate from customer.",
-    created_at: "2026-02-17T15:20:00Z"
+    id: "usr-2",
+    username: "suri_lab_tech",
+    name: "Debasish Dutta (Motherboard Lab Lead)",
+    email: "service@comtechis.in",
+    phone: "9474306951",
+    role: "Service Technician",
+    status: "active",
+    last_login: "2026-08-19T17:30:00Z",
+    created_at: "2026-01-05T00:00:00Z",
   },
   {
-    id: "enq-3",
-    ticket_number: "COM-883109",
-    name: "Tapas Kumar Dey",
-    phone: "9434055214",
-    type: "service",
-    service_or_product_name: "Chip-Level Laptop, Desktop & Printer Motherboard Lab",
-    subject: "Lenovo ThinkPad no power issue",
-    message: "Laptop suddenly died during thunder last night. Charging LED does not turn on. Need quick inspection.",
-    urgency: "critical",
-    status: "in_progress",
-    admin_notes: "Board checked by lab technician. Primary 19V rail capacitor shorted. Replaced & under 4-hour burn test.",
-    created_at: "2026-02-16T10:10:00Z"
-  }
+    id: "usr-3",
+    username: "sales_manager",
+    name: "Rajesh Ghosh (Sales & Licensing Executive)",
+    email: "sales@comtechis.in",
+    phone: "9434197268",
+    role: "Sales Manager",
+    status: "active",
+    last_login: "2026-08-19T16:15:00Z",
+    created_at: "2026-01-10T00:00:00Z",
+  },
+  {
+    id: "usr-4",
+    username: "cctv_field_eng",
+    name: "Tanmoy Sen (Field Deployment Engineer)",
+    email: "support@comtechis.in",
+    phone: "9474306951",
+    role: "Support Executive",
+    status: "active",
+    last_login: "2026-08-19T14:00:00Z",
+    created_at: "2026-01-15T00:00:00Z",
+  },
+];
+
+export const initialMasterLocations: MasterLocation[] = [
+  {
+    id: "loc-1",
+    city_or_area: "Suri Town & DangalPara",
+    pincode: "731101",
+    district: "Birbhum",
+    is_onsite_supported: true,
+    estimated_eta: "Within 1 - 2 Hours",
+  },
+  {
+    id: "loc-2",
+    city_or_area: "Sainthia",
+    pincode: "731234",
+    district: "Birbhum",
+    is_onsite_supported: true,
+    estimated_eta: "Same Day / Within 4 Hours",
+  },
+  {
+    id: "loc-3",
+    city_or_area: "Bolpur & Santiniketan",
+    pincode: "731204",
+    district: "Birbhum",
+    is_onsite_supported: true,
+    estimated_eta: "Same Day / Scheduled Slot",
+  },
+  {
+    id: "loc-4",
+    city_or_area: "Rampurhat",
+    pincode: "731224",
+    district: "Birbhum",
+    is_onsite_supported: true,
+    estimated_eta: "Next Business Day",
+  },
+  {
+    id: "loc-5",
+    city_or_area: "Dubrajpur",
+    pincode: "731123",
+    district: "Birbhum",
+    is_onsite_supported: true,
+    estimated_eta: "Within 3 - 4 Hours",
+  },
+  {
+    id: "loc-6",
+    city_or_area: "Ilambazar",
+    pincode: "731214",
+    district: "Birbhum",
+    is_onsite_supported: true,
+    estimated_eta: "Same Day Dispatch",
+  },
+];
+
+export const initialMasterBrands: MasterBrand[] = [
+  { id: "br-1", name: "Hikvision", category: "CCTV & Surveillance", is_authorized_partner: true },
+  { id: "br-2", name: "CP Plus", category: "CCTV & Surveillance", is_authorized_partner: true },
+  { id: "br-3", name: "Tally Solutions", category: "ERP Software & TDL", is_authorized_partner: true },
+  { id: "br-4", name: "Dell Technologies", category: "Laptops & Desktops", is_authorized_partner: true },
+  { id: "br-5", name: "HP Enterprise", category: "Laptops & Printers", is_authorized_partner: true },
+  { id: "br-6", name: "Lenovo", category: "Laptops & ThinkPads", is_authorized_partner: true },
+  { id: "br-7", name: "Quick Heal / Seqrite", category: "Cybersecurity & Antivirus", is_authorized_partner: true },
+  { id: "br-8", name: "D-Link", category: "Structured Networking", is_authorized_partner: true },
+  { id: "br-9", name: "Epson", category: "EcoTank Printers", is_authorized_partner: true },
 ];

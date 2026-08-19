@@ -47,7 +47,7 @@ export default function BlogsPage() {
       {/* Header */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest border border-cyan-500/20">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border" style={{background:"rgba(123,27,90,0.10)",color:"#7B1B5A",borderColor:"rgba(123,27,90,0.20)"}}>
             <BookOpen className="w-4 h-4" />
             <span>Tech Knowledgebase &amp; Tutorials</span>
           </div>
@@ -81,7 +81,7 @@ export default function BlogsPage() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                   selectedCategory === cat
-                    ? 'bg-cyan-500 text-white shadow-sm'
+                    ? 'bg-[#7B1B5A] text-white shadow-sm'
                     : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200'
                 }`}
               >
@@ -120,7 +120,7 @@ export default function BlogsPage() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
-                    <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded bg-slate-900/80 text-cyan-400 text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm">
+                    <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded bg-slate-900/80 text-[#E9A51A] text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm">
                       {blog.category}
                     </span>
                   </div>
@@ -128,14 +128,14 @@ export default function BlogsPage() {
                   <div className="p-6 space-y-3">
                     <div className="flex items-center gap-3 text-[11px] text-slate-400">
                       <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3 text-cyan-500" />
+                        <Clock className="w-3 h-3 text-[#7B1B5A]" />
                         {blog.reading_time_minutes} min read
                       </span>
-                      <span>•</span>
+                      <span>â€¢</span>
                       <span>{formatDate(blog.published_at)}</span>
                     </div>
 
-                    <h2 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-cyan-500 transition-colors line-clamp-2">
+                    <h2 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-[#7B1B5A] transition-colors line-clamp-2">
                       {blog.title}
                     </h2>
                     <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
@@ -156,7 +156,7 @@ export default function BlogsPage() {
                   </div>
                 </div>
 
-                <div className="p-6 pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-cyan-600 dark:text-cyan-400">
+                <div className="p-6 pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-[#7B1B5A]">
                   <span>Read Article</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -168,3 +168,4 @@ export default function BlogsPage() {
     </div>
   );
 }
+

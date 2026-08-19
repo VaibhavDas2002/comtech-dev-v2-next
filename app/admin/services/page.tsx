@@ -12,6 +12,7 @@ import {
   Sparkles,
   X,
 } from 'lucide-react';
+import { MediaUploader } from '@/components/ui/MediaUploader';
 
 export default function AdminServicesPage() {
   const [services, setServices] = useState<Service[]>([]);
@@ -304,17 +305,12 @@ export default function AdminServicesPage() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Image URL (Unsplash or Direct Link)
-                </label>
-                <input
-                  type="text"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-700 bg-slate-800 text-xs text-white"
-                />
-              </div>
+              <MediaUploader
+                value={imageUrl}
+                onChange={setImageUrl}
+                label="Service Featured Image / Brochure"
+                description="Upload JPEG/PNG/PDF (Max 6MB Base64) or enter an external Web Image URL"
+              />
 
               <div>
                 <label className="block text-xs font-semibold text-slate-300 mb-1">

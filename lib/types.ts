@@ -101,14 +101,16 @@ export interface GalleryItem {
 }
 
 export type EnquiryStatus = 'pending' | 'contacted' | 'quoted' | 'in_progress' | 'resolved' | 'cancelled';
-export type EnquiryType = 'general' | 'service' | 'product' | 'amc_quote' | 'cctv_survey';
+export type EnquiryType = 'general' | 'service' | 'product' | 'amc_quote' | 'cctv_survey' | 'service_appointment';
 export type EnquiryUrgency = 'normal' | 'urgent' | 'critical';
+export type ServiceMode = 'lab_visit' | 'onsite_visit' | 'remote_support';
 
 export interface Enquiry {
   id: string;
   ticket_number: string;
   name: string;
   phone: string;
+  whatsapp_number?: string;
   email?: string;
   type: EnquiryType;
   service_or_product_name?: string;
@@ -118,6 +120,21 @@ export interface Enquiry {
   status: EnquiryStatus;
   admin_notes?: string;
   ip_address?: string;
+
+  // Appointment & Technical Issue details
+  appointment_date?: string;
+  appointment_time_slot?: string;
+  service_mode?: ServiceMode;
+  customer_category?: string;
+  address?: string;
+  landmark?: string;
+  device_brand_model?: string;
+  device_serial?: string;
+  warranty_status?: string;
+  issue_symptoms?: string[];
+  attachment_doc_id?: string;
+  attachment_url?: string;
+
   created_at: string;
   updated_at?: string;
 }
@@ -155,4 +172,56 @@ export interface SiteSettings {
   pincode: string;
   opening_hours: string;
   google_maps_embed_url: string;
+}
+
+export interface DocumentImage {
+  id: string;
+  file_name: string;
+  mime_type: string; // 'image/jpeg' | 'image/png' | 'image/webp' | 'application/pdf'
+  base64_data: string;
+  file_size_bytes?: number;
+  created_at: string;
+  updated_at?: string;
+}
+
+export type UserRole = 'Super Admin' | 'Service Technician' | 'Sales Manager' | 'Support Executive';
+export type UserStatus = 'active' | 'inactive' | 'suspended';
+
+export interface UserAccount {
+  id: string;
+  username: string;
+  name: string;
+  email: string;
+  phone: string;
+  role: UserRole;
+  status: UserStatus;
+  avatar_url?: string;
+  last_login?: string;
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface MasterLocation {
+  id: string;
+  city_or_area: string;
+  pincode: string;
+  district: string;
+  is_onsite_supported: boolean;
+  estimated_eta: string;
+}
+
+export interface MasterBrand {
+  id: string;
+  name: string;
+  category: string;
+  is_authorized_partner: boolean;
+  logo_url?: string;
+}
+
+export interface MasterSymptom {
+  id: string;
+  department: string;
+  symptom_name: string;
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  typical_resolution: string;
 }

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect } from 'react';
 import { useApp } from '@/components/providers/AppProviders';
@@ -71,7 +71,7 @@ export default function ProductsPage() {
       {/* Header */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-widest border border-blue-500/20">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#7B1B5A]/10 text-[#7B1B5A] dark:text-[#E9A51A] text-xs font-bold uppercase tracking-widest border border-[#7B1B5A]/20">
             <ShoppingBag className="w-4 h-4" />
             <span>Comtech Information Services (Sales)</span>
           </div>
@@ -112,7 +112,7 @@ export default function ProductsPage() {
                     onClick={() => setSelectedBrand(b)}
                     className={`px-2.5 py-1 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
                       selectedBrand === b
-                        ? 'bg-blue-600 text-white shadow-sm'
+                        ? 'bg-[#7B1B5A] text-white shadow-sm'
                         : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200'
                     }`}
                   >
@@ -131,7 +131,7 @@ export default function ProductsPage() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                   selectedCategory === cat
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
+                    ? 'bg-[#7B1B5A] text-white shadow-md shadow-blue-600/20'
                     : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                 }`}
               >
@@ -159,7 +159,7 @@ export default function ProductsPage() {
                 setSelectedBrand('all');
                 setSearchQuery('');
               }}
-              className="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold"
+              className="px-4 py-2 rounded-xl bg-[#7B1B5A] text-white text-xs font-bold"
             >
               Reset Filters
             </button>
@@ -180,11 +180,11 @@ export default function ProductsPage() {
                       loading="lazy"
                     />
                     <div className="absolute top-3 left-3 flex flex-col gap-1">
-                      <span className="px-2 py-0.5 rounded bg-blue-600 text-white text-[10px] font-bold">
+                      <span className="px-2 py-0.5 rounded bg-[#7B1B5A] text-white text-[10px] font-bold">
                         {product.brand}
                       </span>
                       {product.discount_price && product.price && (
-                        <span className="px-2 py-0.5 rounded bg-emerald-600 text-white text-[10px] font-bold flex items-center gap-1">
+                        <span className="px-2 py-0.5 rounded bg-[#7B1B5A] text-white text-[10px] font-bold flex items-center gap-1">
                           <Tag className="w-3 h-3" />
                           Save {Math.round(((product.price - product.discount_price) / product.price) * 100)}%
                         </span>
@@ -196,7 +196,7 @@ export default function ProductsPage() {
                   </div>
 
                   <div className="p-6 space-y-3">
-                    <h2 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-cyan-500 transition-colors line-clamp-2">
+                    <h2 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-[#7B1B5A] transition-colors line-clamp-2">
                       {product.title}
                     </h2>
                     <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2">
@@ -229,11 +229,11 @@ export default function ProductsPage() {
                         )}
                       </div>
                     ) : (
-                      <span className="text-sm font-bold text-slate-900 dark:text-cyan-400">
+                      <span className="text-sm font-bold text-slate-900 dark:text-[#E9A51A]">
                         {product.price ? formatINR(product.price) : 'Quote on Request'}
                       </span>
                     )}
-                    <div className="text-[10px] text-emerald-600 dark:text-emerald-400 flex items-center gap-1 mt-0.5">
+                    <div className="text-[10px] text-[#c44a8a] dark:text-[#c44a8a] flex items-center gap-1 mt-0.5">
                       <ShieldCheck className="w-3 h-3" />
                       <span>{product.warranty || 'Official Brand Warranty'}</span>
                     </div>
@@ -255,7 +255,7 @@ export default function ProductsPage() {
                           subject: `Quote for ${product.title}`,
                         })
                       }
-                      className="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-md shadow-blue-600/20 cursor-pointer"
+                      className="px-3.5 py-1.5 rounded-lg bg-[#7B1B5A] hover:bg-blue-500 text-white text-xs font-bold shadow-md shadow-blue-600/20 cursor-pointer"
                     >
                       Request Quote
                     </button>
@@ -288,7 +288,7 @@ export default function ProductsPage() {
               </div>
 
               <div className="w-full sm:w-1/2 space-y-3">
-                <span className="px-2.5 py-0.5 rounded bg-blue-600 text-white text-[10px] font-bold uppercase">
+                <span className="px-2.5 py-0.5 rounded bg-[#7B1B5A] text-white text-[10px] font-bold uppercase">
                   {activeModalProduct.brand}
                 </span>
                 <h3 className="text-lg font-bold font-heading text-slate-900 dark:text-white">
@@ -299,12 +299,12 @@ export default function ProductsPage() {
                 </p>
 
                 <div className="pt-2">
-                  <div className="text-sm font-bold text-slate-900 dark:text-cyan-400">
+                  <div className="text-sm font-bold text-slate-900 dark:text-[#E9A51A]">
                     {activeModalProduct.discount_price
                       ? formatINR(activeModalProduct.discount_price)
                       : formatINR(activeModalProduct.price)}
                   </div>
-                  <div className="text-xs text-emerald-500 font-medium">
+                  <div className="text-xs text-[#c44a8a] font-medium">
                     {activeModalProduct.warranty}
                   </div>
                 </div>
@@ -342,7 +342,7 @@ export default function ProductsPage() {
                     subject: `Quote for ${p.title}`,
                   });
                 }}
-                className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-md cursor-pointer"
+                className="px-5 py-2 rounded-xl bg-[#7B1B5A] hover:bg-blue-500 text-white text-xs font-bold shadow-md cursor-pointer"
               >
                 Request Quote
               </button>
@@ -353,3 +353,4 @@ export default function ProductsPage() {
     </div>
   );
 }
+

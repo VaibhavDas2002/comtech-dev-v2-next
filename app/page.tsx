@@ -7,6 +7,7 @@ import { WhyChooseUs } from '@/components/home/WhyChooseUs';
 import { TestimonialsSection } from '@/components/home/TestimonialsSection';
 import { LatestBlogsSection } from '@/components/home/LatestBlogsSection';
 import { HomeContactSection } from '@/components/home/HomeContactSection';
+import { InteractiveCalculators } from '@/components/home/InteractiveCalculators';
 
 export const revalidate = 60; // Revalidate at most every minute
 
@@ -24,6 +25,7 @@ export default async function HomePage() {
       <HeroSection />
       <ServicesGrid services={services.filter((s) => s.is_active)} />
       <FeaturedProducts products={products} />
+      <InteractiveCalculators />
       <PromotionsBanner promotions={promotions.filter((p) => p.is_active)} />
       <WhyChooseUs />
       <TestimonialsSection testimonials={testimonials.filter((t) => t.is_featured)} />

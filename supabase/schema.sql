@@ -173,6 +173,17 @@ CREATE TABLE IF NOT EXISTS public.site_settings (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- 11. Document & Image Storage Table (Base64 encoded, max 6 MB)
+CREATE TABLE IF NOT EXISTS public.document_image (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    file_name VARCHAR(255) NOT NULL,
+    mime_type VARCHAR(100) NOT NULL, -- 'image/jpeg', 'image/png', 'image/webp', 'application/pdf'
+    base64_data TEXT NOT NULL,
+    file_size_bytes BIGINT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- Enable Row Level Security (RLS)
 ALTER TABLE public.services ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.products ENABLE ROW LEVEL SECURITY;
@@ -182,8 +193,9 @@ ALTER TABLE public.gallery_items ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.enquiries ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.testimonials ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.site_settings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.document_image ENABLE ROW LEVEL SECURITY;
 
--- Public read policies for published content
+-- Public read policies for published content & media
 CREATE POLICY "Public can view active services" ON public.services FOR SELECT USING (is_active = true);
 CREATE POLICY "Public can view active products" ON public.products FOR SELECT USING (in_stock = true OR in_stock = false);
 CREATE POLICY "Public can view published blogs" ON public.blogs FOR SELECT USING (is_published = true);
@@ -191,6 +203,7 @@ CREATE POLICY "Public can view active promotions" ON public.promotions FOR SELEC
 CREATE POLICY "Public can view gallery" ON public.gallery_items FOR SELECT USING (true);
 CREATE POLICY "Public can view testimonials" ON public.testimonials FOR SELECT USING (true);
 CREATE POLICY "Public can view site settings" ON public.site_settings FOR SELECT USING (true);
+CREATE POLICY "Public can view document images" ON public.document_image FOR SELECT USING (true);
 
 -- Public can submit enquiries
 CREATE POLICY "Public can insert enquiries" ON public.enquiries FOR INSERT WITH CHECK (true);
@@ -204,3 +217,4 @@ CREATE POLICY "Admins full access gallery" ON public.gallery_items FOR ALL TO au
 CREATE POLICY "Admins full access enquiries" ON public.enquiries FOR ALL TO authenticated USING (true) WITH CHECK (true);
 CREATE POLICY "Admins full access testimonials" ON public.testimonials FOR ALL TO authenticated USING (true) WITH CHECK (true);
 CREATE POLICY "Admins full access site_settings" ON public.site_settings FOR ALL TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Admins full access document_image" ON public.document_image FOR ALL TO authenticated USING (true) WITH CHECK (true);

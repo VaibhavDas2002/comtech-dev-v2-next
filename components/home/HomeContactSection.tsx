@@ -60,7 +60,7 @@ export function HomeContactSection() {
     <section className="py-20 bg-slate-100/80 dark:bg-[#080d16] relative" id="contact-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-          <span className="text-xs font-bold uppercase tracking-widest text-cyan-600 dark:text-cyan-400">
+          <span className="text-xs font-bold uppercase tracking-widest" style={{color: '#7B1B5A'}}>
             Get In Touch
           </span>
           <h2 className="text-2xl sm:text-4xl font-extrabold font-heading text-slate-900 dark:text-white">
@@ -76,13 +76,13 @@ export function HomeContactSection() {
           <div className="lg:col-span-5 space-y-6">
             <div className="glass-card rounded-2xl p-6 sm:p-8 space-y-6 border border-slate-200 dark:border-slate-800">
               <h3 className="text-lg font-bold font-heading text-slate-900 dark:text-white flex items-center gap-2">
-                <Building className="w-5 h-5 text-cyan-500" />
+                <Building className="w-5 h-5" style={{color: '#7B1B5A'}} />
                 <span>Comtech Headquarters</span>
               </h3>
 
               <div className="space-y-4 text-xs">
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-500 border border-cyan-500/20 shrink-0">
+                  <div className="p-2 rounded-lg shrink-0" style={{background: 'rgba(123,27,90,0.12)', color: '#7B1B5A', border: '1px solid rgba(123,27,90,0.20)'}}>
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
@@ -96,7 +96,7 @@ export function HomeContactSection() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500 border border-blue-500/20 shrink-0">
+                  <div className="p-2 rounded-lg shrink-0" style={{background: 'rgba(233,165,26,0.12)', color: '#E9A51A', border: '1px solid rgba(233,165,26,0.20)'}}>
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
@@ -104,10 +104,10 @@ export function HomeContactSection() {
                       Direct Helplines
                     </span>
                     <div className="space-y-0.5 mt-0.5">
-                      <a href={`tel:${siteSettings.phone_sales}`} className="text-cyan-600 dark:text-cyan-400 hover:underline block font-semibold">
+                      <a href={`tel:${siteSettings.phone_sales}`} className="hover:underline block font-semibold" style={{color: '#E9A51A'}}>
                         Sales: {siteSettings.phone_sales}
                       </a>
-                      <a href={`tel:${siteSettings.phone_service}`} className="text-emerald-600 dark:text-emerald-400 hover:underline block font-semibold">
+                      <a href={`tel:${siteSettings.phone_service}`} className="hover:underline block font-semibold" style={{color: '#c44a8a'}}>
                         Service Lab: {siteSettings.phone_service}
                       </a>
                     </div>
@@ -115,7 +115,7 @@ export function HomeContactSection() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-teal-500/10 text-teal-500 border border-teal-500/20 shrink-0">
+                  <div className="p-2 rounded-lg shrink-0" style={{background: 'rgba(123,27,90,0.12)', color: '#c44a8a', border: '1px solid rgba(196,42,111,0.20)'}}>
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
@@ -174,7 +174,7 @@ export function HomeContactSection() {
                   </p>
 
                   <div className="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 max-w-xs mx-auto">
-                    <span className="text-[10px] uppercase tracking-wider font-bold text-cyan-600 dark:text-cyan-400">
+                    <span className="text-[10px] uppercase tracking-wider font-bold" style={{color: '#7B1B5A'}}>
                       Ticket Reference Number
                     </span>
                     <div className="text-2xl font-extrabold font-mono tracking-wider text-slate-900 dark:text-white mt-1">
@@ -208,7 +208,7 @@ export function HomeContactSection() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest" style={{color: '#7B1B5A'}}>
                     <Sparkles className="w-4 h-4" />
                     <span>Quick Response Lead Capture</span>
                   </div>

@@ -48,8 +48,8 @@ export default async function BlogDetailPage({ params }: BlogDetailProps) {
         <div>
           <Link
             href="/blogs"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 transition-colors"
-          >
+            className="inline-flex items-center gap-1.5 text-xs font-semibold transition-colors" style={{color: '#7B1B5A'}}>
+
             <ArrowLeft className="w-4 h-4" />
             <span>Back to All Articles</span>
           </Link>
@@ -58,7 +58,7 @@ export default async function BlogDetailPage({ params }: BlogDetailProps) {
         {/* Header */}
         <header className="space-y-4">
           <div className="flex items-center gap-2">
-            <span className="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-wider border border-cyan-500/20">
+            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border" style={{background: 'rgba(123,27,90,0.10)', color: '#7B1B5A', borderColor: 'rgba(123,27,90,0.20)'}}>
               {blog.category}
             </span>
           </div>
@@ -69,12 +69,12 @@ export default async function BlogDetailPage({ params }: BlogDetailProps) {
 
           <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-400 pt-2 border-b border-slate-200 dark:border-slate-800 pb-6">
             <div className="flex items-center gap-1.5">
-              <User className="w-4 h-4 text-cyan-500" />
+              <User className="w-4 h-4" style={{color: '#7B1B5A'}} />
               <span>{blog.author} ({blog.author_role})</span>
             </div>
             <span>•</span>
             <div className="flex items-center gap-1.5">
-              <Calendar className="w-4 h-4 text-emerald-500" />
+              <Calendar className="w-4 h-4" style={{color: '#E9A51A'}} />
               <span>{formatDate(blog.published_at)}</span>
             </div>
             <span>•</span>

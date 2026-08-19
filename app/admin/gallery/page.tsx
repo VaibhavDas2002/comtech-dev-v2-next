@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { GalleryItem } from '@/lib/types';
 import { Camera, Plus, Trash2, MapPin, X } from 'lucide-react';
+import { MediaUploader } from '@/components/ui/MediaUploader';
 
 export default function AdminGalleryPage() {
   const [gallery, setGallery] = useState<GalleryItem[]>([]);
@@ -160,17 +161,12 @@ export default function AdminGalleryPage() {
                 </select>
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Image URL *</label>
-                <input
-                  type="text"
-                  required
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="https://images.unsplash.com/..."
-                  className="w-full px-3 py-2 rounded-xl border border-slate-700 bg-slate-800 text-xs text-white"
-                />
-              </div>
+              <MediaUploader
+                value={imageUrl}
+                onChange={setImageUrl}
+                label="Showcase Photo (Image or PDF)"
+                description="Upload JPEG/PNG/PDF (Max 6MB Base64) or enter an external Web Image URL"
+              />
 
               <div>
                 <label className="block text-xs font-semibold text-slate-300 mb-1">Location</label>

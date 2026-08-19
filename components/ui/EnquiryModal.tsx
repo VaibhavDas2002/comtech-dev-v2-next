@@ -90,8 +90,8 @@ export function EnquiryModal() {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="relative w-full max-w-xl p-6 md:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
         {/* Glow accent */}
-        <div className="absolute -top-24 -right-24 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#7B1B5A]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-[#7B1B5A]/20 rounded-full blur-3xl pointer-events-none" />
 
         <button
           onClick={handleResetAndClose}
@@ -103,7 +103,7 @@ export function EnquiryModal() {
 
         {submittedTicket ? (
           <div className="py-6 text-center space-y-4">
-            <div className="w-16 h-16 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto border border-emerald-500/30">
+            <div className="w-16 h-16 bg-[#c44a8a]/10 text-[#c44a8a] rounded-full flex items-center justify-center mx-auto border border-[#c44a8a]/25">
               <CheckCircle2 className="w-9 h-9" />
             </div>
             <div>
@@ -111,12 +111,12 @@ export function EnquiryModal() {
                 Enquiry Registered!
               </h3>
               <p className="text-sm text-slate-600 dark:text-slate-300 mt-1">
-                Our support engineer in Suri will contact you within 30–60 minutes.
+                Our support engineer in Suri will contact you within 30â€“60 minutes.
               </p>
             </div>
 
             <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-center">
-              <span className="text-xs font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#7B1B5A]">
                 Your Priority Ticket ID
               </span>
               <div className="text-2xl font-extrabold font-mono tracking-widest text-slate-900 dark:text-white mt-1">
@@ -127,7 +127,7 @@ export function EnquiryModal() {
             <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
               <button
                 onClick={openWhatsAppDirect}
-                className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium shadow-lg shadow-emerald-600/20 transition-all cursor-pointer"
+                className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#7B1B5A] hover:bg-[#c44a8a] text-white font-medium shadow-lg shadow-emerald-600/20 transition-all cursor-pointer"
               >
                 <MessageSquare className="w-5 h-5" />
                 Chat on WhatsApp Now
@@ -142,7 +142,7 @@ export function EnquiryModal() {
           </div>
         ) : (
           <div>
-            <div className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 text-sm font-semibold mb-1">
+            <div className="flex items-center gap-2 text-[#7B1B5A] text-sm font-semibold mb-1">
               <Sparkles className="w-4 h-4" />
               <span>Instant Sales & Service Quote</span>
             </div>
@@ -150,7 +150,7 @@ export function EnquiryModal() {
               Get Fast Price Quote or Book Service
             </h2>
             <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-6">
-              Comtech Information Services & Comtech Infosys • Suri, Birbhum
+              Comtech Information Services & Comtech Infosys â€¢ Suri, Birbhum
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -246,14 +246,15 @@ export function EnquiryModal() {
 
               <div className="flex items-center justify-between pt-2">
                 <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-                  <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                  <span>100% Privacy • No Spam</span>
+                  <ShieldCheck className="w-4 h-4 text-[#c44a8a]" />
+                  <span>100% Privacy â€¢ No Spam</span>
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-sm shadow-lg shadow-cyan-500/25 transition-all disabled:opacity-50 cursor-pointer"
+                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-white font-semibold text-sm shadow-lg transition-all disabled:opacity-50 cursor-pointer"
+                  style={{background:"linear-gradient(135deg,#7B1B5A 0%,#c44a8a 100%)", boxShadow:"0 8px 24px -4px rgba(123,27,90,0.40)"}}
                 >
                   {isSubmitting ? (
                     <span>Submitting...</span>
@@ -272,3 +273,4 @@ export function EnquiryModal() {
     </div>
   );
 }
+

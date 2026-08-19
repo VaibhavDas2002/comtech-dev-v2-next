@@ -1,38 +1,223 @@
 @import "tailwindcss";
 
+/* ============================================================
+   COMTECH BRAND COLOR SYSTEM
+   Primary Purple  : #7B1B5A  (RGB 123, 27, 90)
+   Primary Golden  : #E9A51A  (RGB 233, 165, 26)
+   Light Grey      : #A6A4A5  (RGB 166, 164, 165)
+   Background White: #FFFFFF
+   ============================================================ */
+
 @layer base {
   :root {
-    --background: #f8fafc;
-    --foreground: #0f172a;
-    --card: #ffffff;
-    --card-foreground: #0f172a;
-    --border: #e2e8f0;
-    --primary: #0284c7;
-    --primary-foreground: #ffffff;
-    --secondary: #0f172a;
-    --secondary-foreground: #ffffff;
-    --accent: #06b6d4;
-    --accent-foreground: #082f49;
-    --muted: #64748b;
-    --muted-background: #f1f5f9;
+    --background: #FFFFFF;
+    --foreground: #1a0511;
+    --card: #FFFFFF;
+    --card-foreground: #1a0511;
+    --border: #e8d5e2;
+    --primary: #7B1B5A;
+    --primary-foreground: #FFFFFF;
+    --secondary: #E9A51A;
+    --secondary-foreground: #1a0511;
+    --accent: #c4286f;
+    --accent-foreground: #FFFFFF;
+    --muted: #A6A4A5;
+    --muted-background: #fdf6fa;
   }
 
   .dark {
-    --background: #090d16;
-    --foreground: #f8fafc;
-    --card: #0f172a;
-    --card-foreground: #f8fafc;
-    --border: #1e293b;
-    --primary: #38bdf8;
-    --primary-foreground: #082f49;
-    --secondary: #1e293b;
-    --secondary-foreground: #f8fafc;
-    --accent: #22d3ee;
-    --accent-foreground: #042f2e;
-    --muted: #94a3b8;
-    --muted-background: #0f172a;
+    --background: #0e0309;
+    --foreground: #fdf6fa;
+    --card: #1c0614;
+    --card-foreground: #fdf6fa;
+    --border: #3a0f2b;
+    --primary: #c44a8a;
+    --primary-foreground: #FFFFFF;
+    --secondary: #E9A51A;
+    --secondary-foreground: #0e0309;
+    --accent: #f0c040;
+    --accent-foreground: #0e0309;
+    --muted: #A6A4A5;
+    --muted-background: #1c0614;
   }
 }
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Glassmorphic Utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(123, 27, 90, 0.12);
+}
+
+.dark .glass-panel {
+  background: rgba(28, 6, 20, 0.80);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(196, 42, 111, 0.15);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(123, 27, 90, 0.10);
+  box-shadow: 0 10px 30px -10px rgba(123, 27, 90, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .glass-card {
+  background: rgba(28, 6, 20, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(196, 42, 111, 0.12);
+  box-shadow: 0 10px 30px -10px rgba(123, 27, 90, 0.5);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(233, 165, 26, 0.45);
+  box-shadow: 0 20px 35px -10px rgba(233, 165, 26, 0.20);
+}
+
+.dark .glass-card:hover {
+  border-color: rgba(233, 165, 26, 0.40);
+  box-shadow: 0 20px 40px -10px rgba(233, 165, 26, 0.25);
+}
+
+/* ============================================================
+   GRADIENT UTILITIES (Brand)
+   ============================================================ */
+.gradient-text {
+  background: linear-gradient(135deg, #7B1B5A 0%, #c44a8a 50%, #E9A51A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .gradient-text {
+  background: linear-gradient(135deg, #e06aae 0%, #f5c842 60%, #E9A51A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-bg-tech {
+  background: radial-gradient(ellipse at 60% 0%, rgba(123, 27, 90, 0.14) 0%, rgba(233, 165, 26, 0.06) 50%, transparent 80%);
+}
+
+.dark .gradient-bg-tech {
+  background: radial-gradient(ellipse at 60% 0%, rgba(123, 27, 90, 0.22) 0%, rgba(233, 165, 26, 0.08) 55%, transparent 85%);
+}
+
+/* Brand Gradient Buttons */
+.btn-brand {
+  background: linear-gradient(135deg, #7B1B5A 0%, #a8256e 100%);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.btn-brand:hover {
+  background: linear-gradient(135deg, #6a1550 0%, #7B1B5A 100%);
+  box-shadow: 0 8px 24px -4px rgba(123, 27, 90, 0.45);
+}
+
+.btn-golden {
+  background: linear-gradient(135deg, #E9A51A 0%, #d48f10 100%);
+  color: #1a0511;
+  transition: all 0.3s ease;
+}
+
+.btn-golden:hover {
+  background: linear-gradient(135deg, #f0b520 0%, #E9A51A 100%);
+  box-shadow: 0 8px 24px -4px rgba(233, 165, 26, 0.45);
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.85; transform: scale(1.03); }
+}
+
+@keyframes holographic-shimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px -4px rgba(123, 27, 90, 0.5); }
+  50%       { box-shadow: 0 0 35px -4px rgba(233, 165, 26, 0.6); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2.5s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.hologram-border {
+  background: linear-gradient(90deg, #7B1B5A, #E9A51A, #A6A4A5, #7B1B5A);
+  background-size: 300% 300%;
+  animation: holographic-shimmer 4s ease infinite;
+}
+
+/* ============================================================
+   3D PERSPECTIVE UTILITIES
+   ============================================================ */
+.perspective-1000 { perspective: 1000px; }
+.preserve-3d      { transform-style: preserve-3d; }
+.translate-z-12   { transform: translateZ(12px); }
+.translate-z-24   { transform: translateZ(24px); }
+
+.glow-purple {
+  box-shadow: 0 0 28px -5px rgba(123, 27, 90, 0.45);
+}
+
+.glow-golden {
+  box-shadow: 0 0 28px -5px rgba(233, 165, 26, 0.45);
+}
+
+/* ============================================================
+   CUSTOM SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+
+::-webkit-scrollbar-track { background: rgba(123, 27, 90, 0.04); }
+.dark ::-webkit-scrollbar-track { background: rgba(28, 6, 20, 0.6); }
+
+::-webkit-scrollbar-thumb {
+  background: rgba(123, 27, 90, 0.35);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(233, 165, 26, 0.70);
+}
+
 
 body {
   background-color: var(--background);
@@ -144,4 +329,47 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(14, 165, 233, 0.6);
+}
+
+/* 3D Perspective & Hologram Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.translate-z-12 {
+  transform: translateZ(12px);
+}
+
+.translate-z-24 {
+  transform: translateZ(24px);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.4);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.4);
+}
+
+@keyframes holographic-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.hologram-border {
+  background: linear-gradient(90deg, #06b6d4, #3b82f6, #10b981, #06b6d4);
+  background-size: 300% 300%;
+  animation: holographic-shimmer 4s ease infinite;
 }

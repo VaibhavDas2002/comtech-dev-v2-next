@@ -27,7 +27,7 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest border border-cyan-500/20">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border" style={{background:"rgba(123,27,90,0.10)",color:"#7B1B5A",borderColor:"rgba(123,27,90,0.20)"}}>
             <Award className="w-4 h-4" />
             <span>Serving Suri &amp; Birbhum Since 2012</span>
           </div>
@@ -44,14 +44,14 @@ export default function AboutPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Sales Wing */}
-          <div className="glass-card rounded-3xl p-8 border border-blue-500/20 space-y-6 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="glass-card rounded-3xl p-8 border border-[#7B1B5A]/20 space-y-6 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#7B1B5A]/10 rounded-full blur-2xl pointer-events-none" />
             <div className="flex items-center gap-3">
-              <div className="p-3 rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/30">
+              <div className="p-3 rounded-2xl bg-[#7B1B5A] text-white shadow-lg shadow-blue-600/30">
                 <ShoppingBag className="w-7 h-7" />
               </div>
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-[#7B1B5A] dark:text-[#E9A51A]">
                   Sales Wing
                 </span>
                 <h2 className="text-2xl font-bold font-heading text-slate-900 dark:text-white">
@@ -82,7 +82,7 @@ export default function AboutPage() {
             </div>
             <button
               onClick={() => openQuoteModal({ type: 'product', subject: 'Sales Division Quote' })}
-              className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-md shadow-blue-600/20 cursor-pointer"
+              className="px-5 py-2.5 rounded-xl bg-[#7B1B5A] hover:bg-blue-500 text-white text-xs font-bold shadow-md shadow-blue-600/20 cursor-pointer"
             >
               Contact Sales Team
             </button>
@@ -90,13 +90,13 @@ export default function AboutPage() {
 
           {/* Service Wing */}
           <div className="glass-card rounded-3xl p-8 border border-emerald-500/20 space-y-6 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#c44a8a]/10 rounded-full blur-2xl pointer-events-none" />
             <div className="flex items-center gap-3">
-              <div className="p-3 rounded-2xl bg-emerald-600 text-white shadow-lg shadow-emerald-600/30">
+              <div className="p-3 rounded-2xl bg-[#7B1B5A] text-white shadow-lg shadow-emerald-600/30">
                 <Wrench className="w-7 h-7" />
               </div>
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-[#c44a8a] dark:text-[#c44a8a]">
                   Service Wing
                 </span>
                 <h2 className="text-2xl font-bold font-heading text-slate-900 dark:text-white">
@@ -109,25 +109,25 @@ export default function AboutPage() {
             </p>
             <div className="space-y-2 text-xs text-slate-700 dark:text-slate-200">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#c44a8a] shrink-0" />
                 <span>Chip-level BGA micro-soldering for Laptops, PCs &amp; MacBooks</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#c44a8a] shrink-0" />
                 <span>Laser printer fuser and logic card rebuild facility</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#c44a8a] shrink-0" />
                 <span>Fiber optic splicing &amp; 24-Port Server rack structured cabling</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#c44a8a] shrink-0" />
                 <span>Corporate IT AMC Contracts with 2-hour SLA response in Suri</span>
               </div>
             </div>
             <button
               onClick={() => openQuoteModal({ type: 'service', subject: 'Service Lab Booking' })}
-              className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md shadow-emerald-600/20 cursor-pointer"
+              className="px-5 py-2.5 rounded-xl bg-[#7B1B5A] hover:bg-[#c44a8a] text-white text-xs font-bold shadow-md shadow-emerald-600/20 cursor-pointer"
             >
               Book Service Lab
             </button>
@@ -140,7 +140,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="glass-card rounded-2xl p-8 space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-500 flex items-center justify-center border border-cyan-500/20">
+              <div className="w-12 h-12 rounded-xl bg-[#7B1B5A]/10 text-[#7B1B5A] flex items-center justify-center border border-[#7B1B5A]/20">
                 <Target className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold font-heading text-slate-900 dark:text-white">
@@ -194,3 +194,4 @@ export default function AboutPage() {
     </div>
   );
 }
+

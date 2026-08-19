@@ -16,9 +16,10 @@ export function PromotionsBanner({ promotions }: PromotionsBannerProps) {
   if (promotions.length === 0) return null;
 
   return (
-    <section className="py-16 bg-gradient-to-b from-slate-900 to-slate-950 text-white relative overflow-hidden">
+    <section className="py-16 text-white relative overflow-hidden" style={{background: 'linear-gradient(180deg, #1a0511 0%, #0e0309 100%)'}}>
       {/* Background glow */}
-      <div className="absolute -top-40 right-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-40 right-10 w-96 h-96 rounded-full blur-3xl pointer-events-none" style={{background: 'rgba(123,27,90,0.12)'}} />
+      <div className="absolute bottom-0 left-10 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{background: 'rgba(233,165,26,0.07)'}} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="flex items-center justify-between mb-8">
@@ -38,7 +39,8 @@ export function PromotionsBanner({ promotions }: PromotionsBannerProps) {
 
           <Link
             href="/promotions"
-            className="hidden sm:flex items-center gap-1 text-xs font-bold text-cyan-400 hover:text-cyan-300"
+            className="hidden sm:flex items-center gap-1 text-xs font-bold transition-colors"
+            style={{color: '#E9A51A'}}
           >
             <span>View All Deals</span>
             <ArrowRight className="w-4 h-4" />
@@ -49,7 +51,10 @@ export function PromotionsBanner({ promotions }: PromotionsBannerProps) {
           {promotions.slice(0, 3).map((promo) => (
             <div
               key={promo.id}
-              className="rounded-2xl bg-gradient-to-br from-slate-800/80 to-slate-900/90 border border-slate-700/80 p-6 flex flex-col justify-between space-y-4 hover:border-cyan-500/40 transition-all shadow-xl relative overflow-hidden group"
+              className="rounded-2xl border p-6 flex flex-col justify-between space-y-4 transition-all shadow-xl relative overflow-hidden group"
+              style={{background: 'linear-gradient(135deg, rgba(26,5,17,0.90) 0%, rgba(14,3,9,0.95) 100%)', borderColor: 'rgba(123,27,90,0.30)'}}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(233,165,26,0.45)'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(123,27,90,0.30)'}
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
@@ -57,17 +62,17 @@ export function PromotionsBanner({ promotions }: PromotionsBannerProps) {
                     {promo.badge}
                   </span>
                   {promo.coupon_code && (
-                    <span className="px-2.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-mono text-[11px] font-bold border border-cyan-500/30 flex items-center gap-1">
+                    <span className="px-2.5 py-0.5 rounded font-mono text-[11px] font-bold flex items-center gap-1" style={{background: 'rgba(233,165,26,0.18)', color: '#E9A51A', border: '1px solid rgba(233,165,26,0.30)'}}>
                       <Tag className="w-3 h-3" />
                       {promo.coupon_code}
                     </span>
                   )}
                 </div>
 
-                <h3 className="text-lg font-bold font-heading text-white group-hover:text-cyan-400 transition-colors">
+                <h3 className="text-lg font-bold font-heading text-white transition-colors group-hover:text-[#E9A51A]">
                   {promo.title}
                 </h3>
-                <p className="text-xs text-cyan-300 font-semibold">{promo.discount_text}</p>
+                <p className="text-xs font-semibold" style={{color: '#E9A51A'}}>{promo.discount_text}</p>
                 <p className="text-xs text-slate-400 leading-relaxed line-clamp-3">
                   {promo.description}
                 </p>
@@ -88,8 +93,8 @@ export function PromotionsBanner({ promotions }: PromotionsBannerProps) {
                       subject: `Claim Offer: ${promo.title} (${promo.coupon_code || ''})`,
                     })
                   }
-                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-xs font-bold shadow-md shadow-cyan-500/20 transition-all cursor-pointer"
-                >
+                  className="px-4 py-2 rounded-xl text-white text-xs font-bold shadow-md transition-all cursor-pointer"
+                  style={{background: 'linear-gradient(135deg, #7B1B5A 0%, #c44a8a 100%)', boxShadow: '0 4px 12px -4px rgba(123,27,90,0.40)'}}>
                   {promo.cta_text || 'Claim Deal'}
                 </button>
               </div>

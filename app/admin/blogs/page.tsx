@@ -11,6 +11,7 @@ import {
   Clock,
   X,
 } from 'lucide-react';
+import { MediaUploader } from '@/components/ui/MediaUploader';
 
 export default function AdminBlogsPage() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -284,17 +285,12 @@ export default function AdminBlogsPage() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Featured Cover Image URL
-                </label>
-                <input
-                  type="text"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-700 bg-slate-800 text-xs text-white"
-                />
-              </div>
+              <MediaUploader
+                value={imageUrl}
+                onChange={setImageUrl}
+                label="Article Cover Image / Document PDF"
+                description="Upload JPEG/PNG/PDF (Max 6MB Base64) or enter an external Web Image URL"
+              />
 
               <div>
                 <label className="block text-xs font-semibold text-slate-300 mb-1">
