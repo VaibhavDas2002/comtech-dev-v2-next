@@ -35,8 +35,8 @@ export default function AdminLoginPage() {
 
       <div className="w-full max-w-md p-8 rounded-3xl bg-slate-900/90 border border-slate-800 backdrop-blur-xl shadow-2xl space-y-6 relative z-10">
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 via-cyan-500 to-teal-400 flex items-center justify-center text-white mx-auto shadow-lg shadow-cyan-500/20">
-            <Cpu className="w-7 h-7" />
+          <div className="w-14 h-14 rounded-2xl bg-white p-1 flex items-center justify-center mx-auto border border-slate-700 shadow-xl">
+            <img src="/Comtech-logo.png" alt="Comtech Logo" className="w-full h-full object-contain" />
           </div>
           <h1 className="text-2xl font-bold font-heading text-white">
             Comtech Admin Portal

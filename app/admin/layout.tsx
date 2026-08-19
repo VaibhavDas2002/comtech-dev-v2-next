@@ -48,8 +48,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Mobile Top Header */}
       <div className="md:hidden flex items-center justify-between p-4 bg-slate-900 border-b border-slate-800">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white">
-            <Cpu className="w-5 h-5" />
+          <div className="w-8 h-8 rounded-lg bg-white p-0.5 flex items-center justify-center border border-slate-700 shrink-0">
+            <img src="/Comtech-logo.png" alt="Comtech Logo" className="w-full h-full object-contain" />
           </div>
           <div>
             <span className="font-bold text-sm font-heading">COMTECH ADMIN</span>
@@ -73,8 +73,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="space-y-6">
           {/* Logo */}
           <div className="hidden md:flex items-center gap-3 px-2 py-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-cyan-500 to-teal-400 flex items-center justify-center text-white shadow-lg shadow-cyan-500/20">
-              <Cpu className="w-6 h-6" />
+            <div className="w-10 h-10 rounded-xl bg-white p-1 flex items-center justify-center border border-slate-700 shadow-md shrink-0">
+              <img src="/Comtech-logo.png" alt="Comtech Logo" className="w-full h-full object-contain" />
             </div>
             <div>
               <span className="text-base font-extrabold font-heading text-white tracking-tight">

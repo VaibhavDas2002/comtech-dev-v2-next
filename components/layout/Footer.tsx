@@ -35,8 +35,12 @@ export function Footer() {
           {/* Column 1: Brand & Identity */}
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-blue-600 via-cyan-500 to-teal-400 flex items-center justify-center text-white shadow-lg shadow-cyan-500/20">
-                <Cpu className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-xl bg-white p-1 flex items-center justify-center border border-slate-700 shadow-lg shrink-0">
+                <img
+                  src="/Comtech-logo.png"
+                  alt="Comtech Logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
