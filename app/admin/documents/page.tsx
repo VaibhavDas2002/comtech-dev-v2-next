@@ -3,15 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import {
   FileText,
-  Image as ImageIcon,
-  Upload,
   Trash2,
   Copy,
   Check,
   ExternalLink,
   Search,
   HardDrive,
-  Sparkles,
+  CheckSquare,
+  Square,
+  X,
+  CheckCircle2,
 } from 'lucide-react';
 import { MediaUploader } from '@/components/ui/MediaUploader';
 
@@ -31,9 +32,18 @@ export default function AdminDocumentsPage() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [uploadValue, setUploadValue] = useState('');
 
+  // Bulk Selection
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
+
   useEffect(() => {
     loadDocuments();
   }, []);
+
+  const showToast = (msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(null), 3000);
+  };
 
   async function loadDocuments() {
     try {
@@ -61,8 +71,40 @@ export default function AdminDocumentsPage() {
     try {
       await fetch(`/api/documents/${id}`, { method: 'DELETE' });
       setDocuments((prev) => prev.filter((d) => d.id !== id));
+      setSelectedIds((prev) => prev.filter((item) => item !== id));
+      showToast('Document deleted');
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const toggleSelectOne = (id: string) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedIds.length === filtered.length && filtered.length > 0) {
+      setSelectedIds([]);
+    } else {
+      setSelectedIds(filtered.map((d) => d.id));
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    if (selectedIds.length === 0) return;
+    if (!confirm(`CONFIRM: Delete ${selectedIds.length} Base64 documents from table?`)) return;
+
+    try {
+      for (const id of selectedIds) {
+        await fetch(`/api/documents/${id}`, { method: 'DELETE' });
+      }
+      setDocuments((prev) => prev.filter((d) => !selectedIds.includes(d.id)));
+      showToast(`${selectedIds.length} documents deleted`);
+      setSelectedIds([]);
+    } catch {
+      alert('Error during bulk deletion');
     }
   };
 
@@ -75,11 +117,19 @@ export default function AdminDocumentsPage() {
 
   return (
     <div className="space-y-8">
+      {/* Toast Notification */}
+      {toastMsg && (
+        <div className="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl bg-emerald-600 text-white text-xs font-bold shadow-2xl flex items-center gap-2 animate-fade-in">
+          <CheckCircle2 className="w-4 h-4" />
+          <span>{toastMsg}</span>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold font-heading text-white flex items-center gap-2">
-            <HardDrive className="w-6 h-6 text-cyan-400" />
+            <HardDrive className="w-6 h-6 text-[#E9A51A]" />
             <span>Document &amp; Base64 Image Storage</span>
           </h1>
           <p className="text-xs text-slate-400 mt-1">
@@ -90,7 +140,7 @@ export default function AdminDocumentsPage() {
         <div className="flex items-center gap-3">
           <div className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs">
             <span className="text-slate-400">Total Stored: </span>
-            <span className="font-bold text-cyan-400">
+            <span className="font-bold text-[#E9A51A]">
               {(totalBytes / (1024 * 1024)).toFixed(2)} MB ({documents.length} Files)
             </span>
           </div>
@@ -108,12 +158,57 @@ export default function AdminDocumentsPage() {
         description="Select any JPEG, PNG, WEBP, or PDF up to 6MB. It will be converted to Base64 with MIME type stored in PostgreSQL."
       />
 
+      {/* Bulk Action Sticky Bar */}
+      {selectedIds.length > 0 && (
+        <div className="p-3.5 rounded-2xl bg-[#1f0516] border border-[#E9A51A]/40 shadow-2xl flex flex-wrap items-center justify-between gap-3 animate-fade-in">
+          <div className="flex items-center gap-3">
+            <span className="px-3 py-1 rounded-xl bg-[#E9A51A] text-slate-950 font-black text-xs font-mono">
+              {selectedIds.length} Files Selected
+            </span>
+            <span className="text-xs text-slate-300 font-semibold hidden sm:inline">
+              Media Bulk Actions:
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleBulkDelete}
+              className="px-3.5 py-1.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-md transition-colors cursor-pointer"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+              <span>Bulk Delete Files</span>
+            </button>
+
+            <button
+              onClick={() => setSelectedIds([])}
+              className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              title="Clear selection"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Documents Library */}
       <div className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <h2 className="text-lg font-bold font-heading text-white">
-            Stored Documents &amp; Media
-          </h2>
+          <div className="flex items-center gap-3">
+            <h2 className="text-lg font-bold font-heading text-white">
+              Stored Documents &amp; Media ({filtered.length})
+            </h2>
+            <button
+              onClick={toggleSelectAll}
+              className="px-2.5 py-1 rounded-lg border border-slate-700 bg-slate-800 text-[11px] font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 cursor-pointer"
+            >
+              {selectedIds.length === filtered.length && filtered.length > 0 ? (
+                <CheckSquare className="w-3.5 h-3.5 text-[#E9A51A]" />
+              ) : (
+                <Square className="w-3.5 h-3.5" />
+              )}
+              <span>{selectedIds.length === filtered.length && filtered.length > 0 ? 'Deselect All' : 'Select All'}</span>
+            </button>
+          </div>
 
           <div className="relative w-full sm:w-72">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -122,7 +217,7 @@ export default function AdminDocumentsPage() {
               placeholder="Search by file name or type..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-700 bg-slate-900 text-xs text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-700 bg-slate-900 text-xs text-white focus:outline-none focus:border-[#7B1B5A]"
             />
           </div>
         </div>
@@ -137,14 +232,28 @@ export default function AdminDocumentsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((doc) => {
               const isPdf = doc.mime_type.includes('pdf');
+              const isSelected = selectedIds.includes(doc.id);
               return (
                 <div
                   key={doc.id}
-                  className="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 flex flex-col justify-between hover:border-slate-700 transition-all shadow-xl"
+                  className={`p-5 rounded-2xl bg-slate-900 border space-y-4 flex flex-col justify-between transition-all shadow-xl ${
+                    isSelected ? 'border-[#E9A51A] bg-[#22071a]' : 'border-slate-800 hover:border-slate-700'
+                  }`}
                 >
                   <div className="space-y-3">
-                    {/* Visual Preview */}
+                    {/* Visual Preview with Select Checkbox */}
                     <div className="relative h-44 w-full rounded-xl overflow-hidden bg-slate-950 flex items-center justify-center border border-slate-800">
+                      <button
+                        onClick={() => toggleSelectOne(doc.id)}
+                        className="absolute top-2 right-2 z-10 p-1 rounded-lg bg-black/60 hover:bg-black/90 cursor-pointer"
+                      >
+                        {isSelected ? (
+                          <CheckSquare className="w-4 h-4 text-[#E9A51A]" />
+                        ) : (
+                          <Square className="w-4 h-4 text-slate-400 hover:text-white" />
+                        )}
+                      </button>
+
                       {isPdf ? (
                         <div className="flex flex-col items-center gap-2 text-red-400">
                           <FileText className="w-12 h-12" />
@@ -158,7 +267,7 @@ export default function AdminDocumentsPage() {
                           loading="lazy"
                         />
                       )}
-                      <span className="absolute top-2 left-2 px-2 py-0.5 rounded bg-slate-900/90 text-[10px] font-bold text-cyan-300 border border-slate-700">
+                      <span className="absolute top-2 left-2 px-2 py-0.5 rounded bg-slate-900/90 text-[10px] font-bold text-[#E9A51A] border border-slate-700">
                         {doc.mime_type}
                       </span>
                     </div>
@@ -178,12 +287,12 @@ export default function AdminDocumentsPage() {
                   <div className="pt-3 border-t border-slate-800 flex items-center justify-between gap-2">
                     <button
                       onClick={() => handleCopyUrl(doc.url, doc.id)}
-                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-400 text-xs font-semibold transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-[#E9A51A] text-xs font-semibold transition-colors cursor-pointer"
                     >
                       {copiedId === doc.id ? (
                         <>
-                          <Check className="w-3.5 h-3.5" />
-                          <span>Copied URL</span>
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                          <span className="text-emerald-400">Copied URL</span>
                         </>
                       ) : (
                         <>
@@ -205,7 +314,7 @@ export default function AdminDocumentsPage() {
                       </a>
                       <button
                         onClick={() => handleDelete(doc.id)}
-                        className="p-1.5 rounded-lg bg-slate-800 hover:bg-red-500/20 text-slate-400 hover:text-red-400"
+                        className="p-1.5 rounded-lg bg-slate-800 hover:bg-red-500/20 text-slate-400 hover:text-red-400 cursor-pointer"
                         title="Delete from document_image table"
                       >
                         <Trash2 className="w-4 h-4" />

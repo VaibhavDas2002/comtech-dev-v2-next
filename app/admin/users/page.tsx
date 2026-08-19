@@ -18,6 +18,9 @@ import {
   Save,
   X,
   RefreshCw,
+  CheckSquare,
+  Square,
+  UserX,
 } from 'lucide-react';
 import { UserAccount, UserRole, UserStatus } from '@/lib/types';
 
@@ -27,6 +30,10 @@ export default function UserManagementPage() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [roleFilter, setRoleFilter] = useState<string>('All');
   
+  // Bulk selection state
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [bulkProcessing, setBulkProcessing] = useState<boolean>(false);
+
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [editingUser, setEditingUser] = useState<UserAccount | null>(null);
@@ -64,6 +71,77 @@ export default function UserManagementPage() {
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3000);
+  };
+
+  // Toggle single selection
+  const toggleSelectOne = (id: string) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
+  // Toggle select all filtered
+  const toggleSelectAll = () => {
+    if (selectedIds.length === filteredUsers.length && filteredUsers.length > 0) {
+      setSelectedIds([]);
+    } else {
+      setSelectedIds(filteredUsers.map((u) => u.id));
+    }
+  };
+
+  // Bulk Actions
+  const handleBulkStatus = async (status: UserStatus) => {
+    if (selectedIds.length === 0) return;
+
+    try {
+      setBulkProcessing(true);
+      for (const id of selectedIds) {
+        const userObj = users.find((u) => u.id === id);
+        if (userObj && userObj.username !== 'Comtech_dev') {
+          await fetch('/api/users', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ...userObj, status }),
+          });
+        }
+      }
+      showToast(`Updated status to "${status}" for selected users`);
+      setSelectedIds([]);
+      fetchUsers();
+    } catch {
+      alert('Error updating user statuses');
+    } finally {
+      setBulkProcessing(false);
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    if (selectedIds.length === 0) return;
+    const targetIds = selectedIds.filter((id) => {
+      const u = users.find((item) => item.id === id);
+      return u && u.username !== 'Comtech_dev';
+    });
+
+    if (targetIds.length === 0) {
+      alert('Cannot delete the primary Super Administrator account.');
+      return;
+    }
+
+    if (!confirm(`CONFIRM: Delete ${targetIds.length} selected staff user(s)?`)) return;
+
+    try {
+      setBulkProcessing(true);
+      for (const id of targetIds) {
+        await fetch(`/api/users?id=${id}`, { method: 'DELETE' });
+      }
+      showToast(`${targetIds.length} users deleted`);
+      setSelectedIds([]);
+      fetchUsers();
+    } catch {
+      alert('Error during bulk delete');
+    } finally {
+      setBulkProcessing(false);
+    }
   };
 
   const handleOpenAdd = () => {
@@ -253,6 +331,57 @@ export default function UserManagementPage() {
         </div>
       </div>
 
+      {/* Bulk Action Sticky Bar */}
+      {selectedIds.length > 0 && (
+        <div className="p-3.5 rounded-2xl bg-[#1f0516] border border-[#E9A51A]/40 shadow-2xl flex flex-wrap items-center justify-between gap-3 animate-fade-in">
+          <div className="flex items-center gap-3">
+            <span className="px-3 py-1 rounded-xl bg-[#E9A51A] text-slate-950 font-black text-xs font-mono">
+              {selectedIds.length} Staff Selected
+            </span>
+            <span className="text-xs text-slate-300 font-semibold hidden sm:inline">
+              Bulk User Actions:
+            </span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={() => handleBulkStatus('active')}
+              disabled={bulkProcessing}
+              className="px-3 py-1.5 rounded-xl bg-emerald-600/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-600/30 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+            >
+              <UserCheck className="w-3.5 h-3.5" />
+              <span>Mark Active</span>
+            </button>
+
+            <button
+              onClick={() => handleBulkStatus('inactive')}
+              disabled={bulkProcessing}
+              className="px-3 py-1.5 rounded-xl bg-amber-600/20 text-amber-300 border border-amber-500/30 hover:bg-amber-600/30 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+            >
+              <UserX className="w-3.5 h-3.5" />
+              <span>Mark Inactive</span>
+            </button>
+
+            <button
+              onClick={handleBulkDelete}
+              disabled={bulkProcessing}
+              className="px-3 py-1.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-md transition-colors cursor-pointer"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+              <span>Bulk Delete</span>
+            </button>
+
+            <button
+              onClick={() => setSelectedIds([])}
+              className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              title="Clear selection"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Filter & Search Bar */}
       <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="relative w-full sm:w-80">
@@ -290,6 +419,19 @@ export default function UserManagementPage() {
           <table className="w-full text-left text-xs">
             <thead className="bg-slate-800/60 text-slate-400 uppercase font-bold text-[10px] tracking-wider border-b border-slate-800">
               <tr>
+                <th className="p-4 w-10 text-center">
+                  <button
+                    onClick={toggleSelectAll}
+                    className="cursor-pointer text-slate-400 hover:text-white"
+                    title="Select / Deselect All"
+                  >
+                    {selectedIds.length === filteredUsers.length && filteredUsers.length > 0 ? (
+                      <CheckSquare className="w-4 h-4 text-[#E9A51A]" />
+                    ) : (
+                      <Square className="w-4 h-4" />
+                    )}
+                  </button>
+                </th>
                 <th className="p-4">User Details</th>
                 <th className="p-4">Role &amp; Permissions</th>
                 <th className="p-4">Contact Info</th>
@@ -300,22 +442,41 @@ export default function UserManagementPage() {
             <tbody className="divide-y divide-slate-800/60">
               {loading ? (
                 <tr>
-                  <td colSpan={5} className="p-8 text-center text-slate-500">
+                  <td colSpan={6} className="p-8 text-center text-slate-500">
                     <RefreshCw className="w-5 h-5 animate-spin mx-auto mb-2 text-[#7B1B5A]" />
                     <span>Loading users database...</span>
                   </td>
                 </tr>
               ) : filteredUsers.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="p-8 text-center text-slate-500">
+                  <td colSpan={6} className="p-8 text-center text-slate-500">
                     No users found matching your criteria.
                   </td>
                 </tr>
               ) : (
                 filteredUsers.map((user) => {
                   const isSuperAdmin = user.username === 'Comtech_dev';
+                  const isSelected = selectedIds.includes(user.id);
                   return (
-                    <tr key={user.id} className="hover:bg-slate-800/40 transition-colors">
+                    <tr
+                      key={user.id}
+                      className={`transition-colors ${
+                        isSelected ? 'bg-[#2b0820]/60' : 'hover:bg-slate-800/40'
+                      }`}
+                    >
+                      <td className="p-4 text-center">
+                        <button
+                          onClick={() => toggleSelectOne(user.id)}
+                          className="cursor-pointer"
+                        >
+                          {isSelected ? (
+                            <CheckSquare className="w-4 h-4 text-[#E9A51A]" />
+                          ) : (
+                            <Square className="w-4 h-4 text-slate-500 hover:text-slate-300" />
+                          )}
+                        </button>
+                      </td>
+
                       <td className="p-4">
                         <div className="flex items-center gap-3">
                           <div
@@ -393,7 +554,7 @@ export default function UserManagementPage() {
                         <div className="flex items-center justify-end gap-1.5">
                           <button
                             onClick={() => handleOpenEdit(user)}
-                            className="p-1.5 rounded-lg border border-slate-700 bg-slate-800 text-slate-300 hover:text-white hover:border-[#7B1B5A] transition-colors"
+                            className="p-1.5 rounded-lg border border-slate-700 bg-slate-800 text-slate-300 hover:text-white hover:border-[#7B1B5A] transition-colors cursor-pointer"
                             title="Edit User"
                           >
                             <Edit2 className="w-3.5 h-3.5" />
@@ -401,7 +562,7 @@ export default function UserManagementPage() {
                           {!isSuperAdmin && (
                             <button
                               onClick={() => handleDelete(user.id, user.username)}
-                              className="p-1.5 rounded-lg border border-red-500/30 bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors"
+                              className="p-1.5 rounded-lg border border-red-500/30 bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors cursor-pointer"
                               title="Delete User"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
@@ -438,7 +599,7 @@ export default function UserManagementPage() {
               </div>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800"
+                className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -547,7 +708,7 @@ export default function UserManagementPage() {
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2.5 rounded-xl border border-slate-700 text-xs font-semibold text-slate-300 hover:bg-slate-800 transition-colors"
+                  className="px-4 py-2.5 rounded-xl border border-slate-700 text-xs font-semibold text-slate-300 hover:bg-slate-800 transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
