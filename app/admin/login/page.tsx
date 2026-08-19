@@ -73,18 +73,7 @@ export default function AdminLoginPage() {
           </p>
         </div>
 
-        {/* Credentials reminder badge */}
-        <div className="p-3 rounded-2xl bg-slate-900/80 border border-slate-800 text-[11px] text-slate-300 space-y-1">
-          <div className="flex items-center justify-between text-slate-400 font-mono">
-            <span>Username:</span>
-            <strong className="text-[#E9A51A]">Comtech_dev</strong>
-          </div>
-          <div className="flex items-center justify-between text-slate-400 font-mono">
-            <span>Password:</span>
-            <strong className="text-pink-400 font-mono">DuPi$731101</strong>
-          </div>
-        </div>
-
+    
         {error && (
           <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs text-center font-medium">
             {error}
