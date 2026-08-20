@@ -18,6 +18,7 @@ import {
   Award,
 } from 'lucide-react';
 import { siteSettings } from '@/lib/store/seedData';
+import { RibbonBadge, CornerRibbon } from '@/components/ui/Ribbon';
 
 export default function AboutPage() {
   const { openQuoteModal } = useApp();
@@ -27,15 +28,18 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border" style={{background:"rgba(123,27,90,0.10)",color:"#7B1B5A",borderColor:"rgba(123,27,90,0.20)"}}>
-            <Award className="w-4 h-4" />
-            <span>Serving Suri &amp; Birbhum Since 2012</span>
+          <div className="flex justify-center">
+            <RibbonBadge
+              text="Established 1997 • Over 29 Years of IT Excellence"
+              icon="award"
+              size="md"
+            />
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold font-heading text-slate-900 dark:text-white">
             Pioneering IT Excellence in <span className="gradient-text">Birbhum District</span>
           </h1>
           <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
-            Founded with a vision to deliver tier-1 technology hardware and laboratory-grade repair diagnostics to Suri and surrounding regions without needing to send equipment to Kolkata.
+            Established in 1997 with a vision to deliver tier-1 technology hardware, authorized CCTV surveillance, certified Tally Prime ERP, and laboratory-grade motherboard diagnostics to Suri and surrounding regions for over 29 years without needing to send equipment to Kolkata.
           </p>
         </div>
       </section>
@@ -45,6 +49,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Sales Wing */}
           <div className="glass-card rounded-3xl p-8 border border-[#7B1B5A]/20 space-y-6 relative overflow-hidden">
+            <CornerRibbon text="EST. 1997" />
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#7B1B5A]/10 rounded-full blur-2xl pointer-events-none" />
             <div className="flex items-center gap-3">
               <div className="p-3 rounded-2xl bg-[#7B1B5A] text-white shadow-lg shadow-blue-600/30">
@@ -60,7 +65,7 @@ export default function AboutPage() {
               </div>
             </div>
             <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              The commercial sales and digital software licensing backbone. As certified channel partners, we supply verified genuine OEM hardware, CCTV surveillance packages, Tally Prime perpetual licenses, enterprise endpoint protection, and server hardware.
+              The commercial sales and digital software licensing backbone since 1997. As certified channel partners, we supply verified genuine OEM hardware, CCTV surveillance packages, Tally Prime perpetual licenses, enterprise endpoint protection, and server hardware.
             </p>
             <div className="space-y-2 text-xs text-slate-700 dark:text-slate-200">
               <div className="flex items-center gap-2">
@@ -90,6 +95,7 @@ export default function AboutPage() {
 
           {/* Service Wing */}
           <div className="glass-card rounded-3xl p-8 border border-emerald-500/20 space-y-6 relative overflow-hidden">
+            <CornerRibbon text="EST. 1997" />
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#c44a8a]/10 rounded-full blur-2xl pointer-events-none" />
             <div className="flex items-center gap-3">
               <div className="p-3 rounded-2xl bg-[#7B1B5A] text-white shadow-lg shadow-emerald-600/30">

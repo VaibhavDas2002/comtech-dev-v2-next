@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useApp } from '../providers/AppProviders';
 import { ThreeTechCanvas } from '../ui/ThreeTechCanvas';
 import { Tilt3DCard } from '../ui/Tilt3DCard';
+import { HeroRibbonBanner, CornerRibbon } from '../ui/Ribbon';
 import {
   ShieldCheck,
   Cpu,
@@ -33,14 +34,9 @@ export function HeroSection() {
       <div className="absolute top-1/4 left-1/3 w-[700px] h-[400px] blur-[140px] rounded-full pointer-events-none" style={{background: 'radial-gradient(ellipse, rgba(123,27,90,0.18) 0%, rgba(233,165,26,0.08) 60%, transparent 100%)'}} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-        {/* Top announcement pill */}
+        {/* Top 3D Folded Ribbon Banner */}
         <div className="flex justify-start mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/30 text-xs text-slate-300 backdrop-blur-md shadow-xl">
-            <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
-            <span className="font-semibold text-cyan-400">Suri&apos;s #1 Technology Hub</span>
-            <span className="text-slate-500">•</span>
-            <span className="text-slate-300">Sales &amp; Chip-Level Service Lab</span>
-          </div>
+          <HeroRibbonBanner />
         </div>
 
         {/* Hero 2-Column Split: Content & 3D Interactive WebGL Element */}
@@ -292,8 +288,9 @@ export function HeroSection() {
         {/* 3D Stat Counters with Tilt Physics */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10 max-w-5xl mx-auto">
           <Tilt3DCard maxTilt={15} scale={1.04}>
-            <div className="p-5 rounded-2xl bg-white dark:bg-[#1c0614]/80 border border-[#e8d5e2] dark:border-[#3a0f2b] text-center shadow-xl">
-              <div className="text-3xl sm:text-4xl font-extrabold font-heading" style={{color: '#7B1B5A'}}>12+</div>
+            <div className="relative overflow-hidden p-5 rounded-2xl bg-white dark:bg-[#1c0614]/80 border border-[#e8d5e2] dark:border-[#3a0f2b] text-center shadow-xl">
+              <CornerRibbon text="EST. 1997" />
+              <div className="text-3xl sm:text-4xl font-extrabold font-heading" style={{color: '#7B1B5A'}}>29+</div>
               <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Years in Suri &amp; Birbhum</div>
             </div>
           </Tilt3DCard>

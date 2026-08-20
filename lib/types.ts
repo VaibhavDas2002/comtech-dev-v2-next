@@ -172,6 +172,8 @@ export interface SiteSettings {
   pincode: string;
   opening_hours: string;
   google_maps_embed_url: string;
+  established_year?: number;
+  years_of_experience?: string;
 }
 
 export interface DocumentImage {

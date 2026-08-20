@@ -30,7 +30,9 @@ export const siteSettings: SiteSettings = {
   state: "West Bengal",
   pincode: "731101",
   opening_hours: "Mon - Sat: 9:30 AM - 8:30 PM | Sun: Closed / Emergency On-Call",
-  google_maps_embed_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3654.5583647413627!2d87.52589531497984!3d23.90906238451152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f993d0f0c058eb%3A0x88c2b53cb1cbfd22!2sSuri%2C%20West%20Bengal%20731101!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+  google_maps_embed_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3654.5583647413627!2d87.52589531497984!3d23.90906238451152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f993d0f0c058eb%3A0x88c2b53cb1cbfd22!2sSuri%2C%20West%20Bengal%20731101!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin",
+  established_year: 1997,
+  years_of_experience: "29+"
 };
 
 export const initialServices: Service[] = [

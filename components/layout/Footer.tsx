@@ -15,6 +15,7 @@ import {
   Heart,
 } from 'lucide-react';
 import { siteSettings } from '@/lib/store/seedData';
+import { RibbonBadge } from '../ui/Ribbon';
 
 export function Footer() {
   const pathname = usePathname();
@@ -58,16 +59,17 @@ export function Footer() {
             </Link>
 
             <p className="text-xs text-slate-400 leading-relaxed pr-6">
-              Birbhum&apos;s leading technology powerhouse since 2012. Specializing in enterprise CCTV surveillance, certified Tally Prime ERP solutions, advanced chip-level motherboard diagnostics, fiber networking, and custom web applications.
+              Birbhum&apos;s leading technology powerhouse since 1997 (over 29 years of continuous excellence). Specializing in enterprise CCTV surveillance, certified Tally Prime ERP solutions, advanced chip-level motherboard diagnostics, fiber networking, and custom web applications.
             </p>
 
-            <div className="flex items-center gap-3 pt-2">
+            <div className="flex flex-wrap items-center gap-2.5 pt-2">
+              <RibbonBadge text="Est. 1997 • 29+ Years" size="sm" icon="award" />
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs" style={{background: '#1a0511', border: '1px solid #3a0f2b', color: '#E9A51A'}}>
                 <Shield className="w-3.5 h-3.5" />
-                <span>GST Registered &amp; Certified</span>
+                <span>GST Registered</span>
               </div>
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs" style={{background: '#1a0511', border: '1px solid #3a0f2b', color: '#c44a8a'}}>
-                <span>100% Genuine Brands</span>
+                <span>100% Genuine</span>
               </div>
             </div>
           </div>

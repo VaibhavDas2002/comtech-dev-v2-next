@@ -19,6 +19,8 @@ import {
   Lock,
 } from 'lucide-react';
 
+import { NavbarHeritageRibbon } from '../ui/Ribbon';
+
 export function Navbar() {
   const pathname = usePathname();
   const { theme, toggleTheme, openQuoteModal } = useApp();
@@ -55,13 +57,14 @@ export function Navbar() {
       {/* Top emergency & contact bar */}
       <div className="bg-[#1a0511] text-slate-300 text-xs py-1.5 px-4 border-b border-[#3a0f2b] hidden md:block">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5" style={{color: '#E9A51A'}}>
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-1.5 font-medium" style={{color: '#E9A51A'}}>
               <Shield className="w-3.5 h-3.5" />
-              <span>Suri&apos;s #1 Authorized IT Sales &amp; Advanced Motherboard Service Lab</span>
+              <span>Est. 1997 • Suri&apos;s #1 Authorized IT Sales &amp; Motherboard Lab (29+ Years of Trust)</span>
             </span>
-            <span className="text-slate-400 hidden lg:inline">
-              📍 Beside A.B.T.A Building, New DangalPara, Suri, Birbhum – 731101
+            <span className="text-slate-500 hidden xl:inline">•</span>
+            <span className="text-slate-400 hidden xl:inline">
+              📍 Beside A.B.T.A Building, New DangalPara, Suri – 731101
             </span>
           </div>
           <div className="flex items-center gap-5">
@@ -110,6 +113,7 @@ export function Navbar() {
                 <span className="text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded" style={{background: 'rgba(123,27,90,0.12)', color: '#7B1B5A', border: '1px solid rgba(123,27,90,0.25)'}}>
                   Suri
                 </span>
+                <NavbarHeritageRibbon />
               </div>
               <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 -mt-0.5">
                 Information Services <span style={{color: '#E9A51A'}}>&bull;</span> Infosys

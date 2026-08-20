@@ -12,6 +12,8 @@ import {
   CheckCircle,
 } from 'lucide-react';
 
+import { CornerRibbon } from '../ui/Ribbon';
+
 export function WhyChooseUs() {
   const points = [
     {
@@ -51,10 +53,11 @@ export function WhyChooseUs() {
     },
     {
       icon: Users,
-      title: '12+ Years Local Trust',
-      desc: 'Over 350+ commercial shops, educational institutions, hospitals, and diagnostic clinics rely on Comtech across Birbhum.',
-      color: 'text-white border-[#A6A4A5]/30',
-      bg: '#6b696a',
+      title: '29+ Years Local Trust (Est. 1997)',
+      desc: 'Established in 1997. Over 350+ commercial shops, educational institutions, hospitals, and diagnostic clinics rely on Comtech across Birbhum.',
+      color: 'text-white border-[#E9A51A]/40',
+      bg: '#7B1B5A',
+      isEst: true,
     },
   ];
 
@@ -79,8 +82,9 @@ export function WhyChooseUs() {
             return (
               <div
                 key={idx}
-              className="glass-card rounded-2xl p-6 border border-[#e8d5e2] dark:border-[#3a0f2b] space-y-4 hover:border-[#E9A51A]/30 transition-all"
+                className="glass-card rounded-2xl p-6 border border-[#e8d5e2] dark:border-[#3a0f2b] space-y-4 hover:border-[#E9A51A]/30 transition-all relative overflow-hidden"
               >
+                {pt.isEst && <CornerRibbon text="EST. 1997" />}
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center border ${pt.color}`}
                   style={{background: pt.bg}}>
                   <Icon className="w-6 h-6" />
